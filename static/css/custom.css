@@ -1,4 +1,4 @@
-/* You can add custom styles here. */
+﻿/* You can add custom styles here. */
 
 nav a {
   font-style: normal;
@@ -27,6 +27,29 @@ header,
 footer {
   background-color: #ebf4f7;
   color: #d490a6;
+}
+
+/* 白色波点背景：两层圆点错开半格；fixed = 波点钉在屏幕上，滚动时内容滑过 */
+body,
+header,
+footer {
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.45) 5px, transparent 5.5px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.45) 5px, transparent 5.5px);
+  background-size: 80px 80px;
+  background-position: 0 0, 40px 40px;
+  background-attachment: fixed;
+}
+
+/* 顶部导航栏内部的背景色块：也铺上同一张波点布（fixed 保证对齐无缝） */
+header > div.absolute.bg-base,
+header > div.fixed::before {
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.25) 5px, transparent 5.5px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.25) 5px, transparent 5.5px) !important;
+  background-size: 80px 80px !important;
+  background-position: 0 0, 40px 40px !important;
+  background-attachment: fixed !important;
 }
 
 :root {

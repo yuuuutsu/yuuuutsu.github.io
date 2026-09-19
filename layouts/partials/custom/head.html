@@ -4,3 +4,17 @@
     font-style: normal !important;
   }
 </style>
+
+{{/* 永久锁定明亮模式：禁用黑暗模式与切换按钮 */}}
+<script>
+  try { localStorage.setItem("theme", "light"); } catch (e) {}
+  document.addEventListener("DOMContentLoaded", function () {
+    document.documentElement.classList.remove("dark");
+  });
+  window.addEventListener("load", function () {
+    document.documentElement.classList.remove("dark");
+  });
+</script>
+<style>
+  #header-theme-button { display: none !important; }
+</style>
