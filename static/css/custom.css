@@ -130,3 +130,32 @@ nav {
 .content p:has(> img) {
   margin-top: -1.8em;   /* 负数 = 向上贴近 */
 }
+
+/* ===== 手机端适配：屏幕窄于 640px 时生效，电脑端不受影响 ===== */
+@media (max-width: 640px) {
+  /* 单张大图：放开 60% 宽度限制，铺满手机屏，去掉左缩进 */
+  .content img {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  /* 图片宫格：手机上改成两列（三列太挤），取消左缩进 */
+  .content p:has(> img:not([width]):not(:only-child)) {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;
+    gap: 6px;
+  }
+
+  /* 四宫格在手机上保持 2x2，不变 */
+
+  /* 收紧缩进：手机上取消所有宫格的左缩进 */
+  .content p:has(> img),
+  .content p:has(+ p > img) {
+    margin-left: 0;
+  }
+
+  /* 正文字号在手机上略降一号，避免每行只有几个字 */
+  .content {
+    font-size: 16px;
+  }
+}
