@@ -1,3 +1,0 @@
-home=200
-icon_link=True
-icon_file=200
