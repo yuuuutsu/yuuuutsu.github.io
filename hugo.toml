@@ -1,4 +1,4 @@
-baseURL = 'http://localhost:1313/'
+baseURL = 'https://yuuuutsu.github.io/'
 locale = 'zh-cn'
 title = '有信心'
 theme = "hugo-toigian"
