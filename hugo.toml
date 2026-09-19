@@ -1,5 +1,6 @@
 baseURL = 'https://yuuuutsu.github.io/'
 locale = 'zh-cn'
+timeZone = 'Asia/Shanghai'
 title = '有信心'
 theme = "hugo-toigian"
 
@@ -41,6 +42,10 @@ theme = "hugo-toigian"
     name = "Archive"
     url = "/posts"
     weight = 2
+  [[menu.nav]]
+    name = "图库"
+    url = "/gallery"
+    weight = 3
 
 # 关闭 Hugo 对 Node 工具的沙箱限制（toigian 主题构建 CSS 需要）
 [security.node.permissions]

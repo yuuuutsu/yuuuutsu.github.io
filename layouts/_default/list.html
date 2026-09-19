@@ -1,0 +1,51 @@
+{{ define "main" }}
+  <div class="content">{{ .Content | emojify }}</div>
+
+  {{ if eq .Kind "section" }}
+    {{/* 栏目页：先列子分类，再列本级文章（Archive / 图库都用这个） */}}
+    {{ $subs := .Sections }}
+    {{ if $subs }}
+      <div class="content">
+        {{ range $subs }}
+          <div class="grid grid-cols-3 gap-4 my-2">
+            <a href="{{ .RelPermalink }}" class="col-span-2">{{ .Title }}</a>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+    {{ range .RegularPages.GroupByDate "2006" }}
+      <div class="content">
+        <div class="text-2xl font-bold my-4 border-b border-dashed">{{ .Key }}</div>
+        <div class="flex-grow">
+          {{ range .Pages.ByLastmod.Reverse }}
+            <div class="grid grid-cols-3 gap-4 my-2">
+              <a href="{{ .RelPermalink }}" class="col-span-2">{{ .Title }}</a>
+              <div class="flex justify-end">
+                {{- partial "date" .Date -}}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  {{ else }}
+    {{/* 分类总览/标签等页面保持主题原样式 */}}
+    {{ range .Pages.GroupByDate "2006" }}
+      <div class="content">
+        <div class="text-2xl font-bold my-4 border-b border-dashed">
+          {{ .Key }}
+        </div>
+        <div class="flex-grow">
+          {{ range (where .Pages.ByLastmod.Reverse "Section" "!=" "") }}
+            <div class="grid grid-cols-3 gap-4 my-2">
+              <a href="{{ .RelPermalink }}" class="col-span-2">{{ .Title }}</a>
+              <div class="flex justify-end">
+                {{- partial "date" .Date -}}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+{{ end }}

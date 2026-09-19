@@ -1,0 +1,50 @@
+{{/* 图库小部件：cat="分类名" 时只显示该分类的图片；不传参数则显示全部（stickers 表情包除外） */}}
+{{ $cat := .Get "cat" }}
+{{ $exts := slice ".jpg" ".jpeg" ".png" ".gif" ".webp" ".svg" ".avif" }}
+
+{{- define "jg-walk" -}}
+  {{- $path := .path }}{{- $prefix := .prefix }}{{- $exts := .exts -}}
+  {{- range readDir $path -}}
+    {{- if .IsDir -}}
+      {{- if ne .Name "stickers" -}}
+        {{- template "jg-walk" (dict "path" (printf "%s/%s" $path .Name) "prefix" (printf "%s/%s" $prefix .Name) "exts" $exts) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $ext := lower (path.Ext .Name) -}}
+      {{- if in $exts $ext -}}
+        {{- $src := printf "/%s/%s" $prefix .Name -}}
+        <img src="{{ $src }}" alt="{{ .Name }}" title="{{ .Name }}" loading="lazy">
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ if $cat }}
+<div class="jg-gallery">
+  {{ template "jg-walk" (dict "path" (printf "static/images/%s" $cat) "prefix" (printf "images/%s" $cat) "exts" $exts) }}
+</div>
+{{ else }}
+<div class="jg-gallery">
+  {{ template "jg-walk" (dict "path" "static/images" "prefix" "images" "exts" $exts) }}
+</div>
+{{ end }}
+
+<style>
+  .jg-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+  }
+  .jg-gallery img {
+    display: block;
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    background: rgba(128, 128, 128, 0.06);
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
+  }
+  .jg-gallery img:hover { transform: scale(1.05); }
+</style>
