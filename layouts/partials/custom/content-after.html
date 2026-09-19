@@ -76,7 +76,7 @@
     .lb-prev { left: 6px; }
     .lb-next { right: 6px; }
   }
-  .content img { cursor: zoom-in; }
+  .content img:not([width]) { cursor: zoom-in; }
 </style>
 
 <div class="lb-overlay" id="lightbox" aria-hidden="true">
@@ -98,7 +98,11 @@
     var btnNext   = document.getElementById('lightbox-next');
     var btnClose  = document.getElementById('lightbox-close');
 
-    var imgs = Array.prototype.slice.call(document.querySelectorAll('.content img'));
+    /* 排除图片：① 带 width 属性的内联小图；② stickers 文件夹里的图片 */
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.content img:not([width])'));
+    imgs = imgs.filter(function (img) {
+      return img.getAttribute('src').indexOf('/stickers/') === -1;
+    });
     var idx = 0;
     var startX = null;
 
