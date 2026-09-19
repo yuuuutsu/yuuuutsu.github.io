@@ -32,14 +32,17 @@
 <style>
   .jg-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 4px;
   }
   .jg-gallery img {
     display: block;
     width: 100%;
-    height: 170px;
+    max-width: 100%; /* 覆盖 custom.css 对 .content img 的 60%/480px 宽度上限 */
+    aspect-ratio: 16 / 9;
     object-fit: cover;
+    margin: 0;
+    box-shadow: none;
     border-radius: 10px;
     border: 1px solid rgba(128, 128, 128, 0.25);
     background: rgba(128, 128, 128, 0.06);
