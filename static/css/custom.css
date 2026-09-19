@@ -36,3 +36,59 @@ footer {
 nav {
   text-transform: none !important;
 }
+
+/* 文章图片缩小、略向右缩进（点击仍可看大图） */
+.content img {
+  display: block;
+  max-width: min(60%, 480px);
+  height: auto;
+  margin-right: auto;
+  margin-left: 2em;
+  border-radius: 6px;
+}
+
+/* 装着图片的段落：收掉上下边距，让文字和图片贴得更近 */
+.content p:has(> img) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* 紧挨着图片上方的那段文字：也收掉下边距 */
+.content p:has(+ p > img) {
+  margin-bottom: 0;
+}
+
+/* 带宽度属性的小表情包：跟文字排在一行，不换行 */
+.content img[width] {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 4px;
+  border-radius: 4px;
+}
+
+/* 连续多张大图：自动排成三列宫格 */
+.content p:has(> img:not([width]):not(:only-child)) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 2em;
+}
+
+.content p:has(> img:not([width]):not(:only-child)) img {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+}
+
+/* 正好四张图：排成 2x2 四宫格（第4张图是最后一张时触发） */
+.content p:has(> img:not([width]):nth-child(4):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.content p:has(> img) {
+  margin-top: -1.8em;   /* 负数 = 向上贴近 */
+}

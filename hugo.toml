@@ -14,6 +14,10 @@ theme = "hugo-toigian"
 
 # 文章里的 Markdown 语法设置
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # 允许在文章里直接写 HTML（span 字号/颜色等）
+      unsafe = true
   [markup.highlight]
     codeFences = true
     guessSyntax = true
