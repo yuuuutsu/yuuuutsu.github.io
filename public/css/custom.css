@@ -1,0 +1,38 @@
+/* You can add custom styles here. */
+
+nav a {
+  font-style: normal;
+}
+
+a {
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "喵啃糖圆";
+  src: url("/fonts/喵啃糖圆.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "jf-openhuninn";
+  src: url("/fonts/jf-openhuninn-2.1.ttf") format("truetype");
+}
+
+body {
+  font-family: "喵啃糖圆", "jf-openhuninn", sans-serif;
+}
+
+body,
+header,
+footer {
+  background-color: #ebf4f7;
+  color: #d490a6;
+}
+
+:root {
+  --base: #ebf4f7;
+}
+
+nav {
+  text-transform: none !important;
+}

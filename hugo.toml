@@ -1,0 +1,41 @@
+baseURL = 'http://localhost:1313/'
+locale = 'zh-cn'
+title = '有信心'
+theme = "hugo-toigian"
+
+[params]
+  # 右侧目录开关
+  toc = true
+  # 评论开关（未配置评论服务，先关闭）
+  comments = false
+  [params.author]
+    name = "Blogger"
+    email = "me@example.com"
+
+# 文章里的 Markdown 语法设置
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = false
+    tabWidth = 4
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+# 顶部导航菜单
+[menu]
+  [[menu.nav]]
+    name = "About"
+    url = "/about"
+    weight = 1
+  [[menu.nav]]
+    name = "Archive"
+    url = "/posts"
+    weight = 2
+
+# 关闭 Hugo 对 Node 工具的沙箱限制（toigian 主题构建 CSS 需要）
+[security.node.permissions]
+  disable = true

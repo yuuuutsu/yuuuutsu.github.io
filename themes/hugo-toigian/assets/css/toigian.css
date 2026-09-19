@@ -1,0 +1,169 @@
+/* Tailwind base - put variables under: tailwind.config.js */
+@import "tailwindcss/base";
+
+/* Tailwind component classes registered by plugins*/
+@import "tailwindcss/components";
+
+/* Tailwind's utility classes - generated based on config file */
+@import "tailwindcss/utilities";
+
+/* Site Specific */
+@import "assets/css/site";
+/* Custom defined styles */
+@import "assets/css/custom";
+
+/* Floating TOC Styles */
+.toc-container {
+  display: none;
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  transition: width 0.3s ease, transform 0.3s ease;
+  max-height: 80vh;
+  align-items: flex-start;
+}
+
+@media screen and (min-width: 768px) {
+  .toc-container {
+    display: flex;
+  }
+}
+
+.toc-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.toc-bar {
+  width: 16px;
+  height: 2px;
+  background-color: var(--text);
+  opacity: 0.3;
+  transition: opacity 0.2s ease, width 0.2s ease;
+}
+
+.toc-bar.active {
+  opacity: 1;
+  width: 24px;
+  background-color: var(--iris);
+}
+
+.toc-expanded {
+  display: none;
+  background: var(--base);
+  color: var(--text);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid var(--surface);
+  width: 280px;
+  overflow-y: auto;
+  max-height: 70vh;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.toc-container:hover .toc-expanded,
+.toc-container.is-expanded .toc-expanded {
+  display: block;
+  opacity: 1;
+}
+
+.toc-container:hover .toc-bars,
+.toc-container.is-expanded .toc-bars {
+  display: none;
+}
+
+/* Mobile TOC Styles */
+.mobile-toc {
+  border-bottom: 1px solid var(--surface);
+  padding-bottom: 1rem;
+}
+
+.mobile-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-toc summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-toc summary::before {
+  content: '{';
+  color: var(--muted);
+}
+
+.mobile-toc summary::after {
+  content: '}';
+  color: var(--muted);
+}
+
+.mobile-toc #TableOfContents ul,
+.mobile-toc #TableOfContents ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.mobile-toc #TableOfContents ul ul,
+.mobile-toc #TableOfContents ul ol,
+.mobile-toc #TableOfContents ol ul,
+.mobile-toc #TableOfContents ol ol {
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.mobile-toc #TableOfContents a {
+  color: var(--text);
+  opacity: 0.7;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  display: inline-block;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.mobile-toc #TableOfContents a:hover {
+  opacity: 1;
+  color: var(--iris);
+}
+
+.toc-header {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+#toc-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#toc-list ul ul {
+  padding-left: 1rem;
+  font-size: 0.9em;
+}
+
+#toc-list a {
+  text-decoration: none;
+  display: block;
+  padding: 4px 0;
+  transition: color 0.2s, opacity 0.2s;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+#toc-list a:hover, #toc-list a.active {
+  opacity: 1;
+  color: var(--iris);
+}

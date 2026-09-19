@@ -1,0 +1,18 @@
+/* You can add custom styles here. */
+
+nav a {
+  font-style: normal;
+}
+
+a {
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "喵啃糖圆";
+  src: url("/fonts/喵啃糖圆.ttf") format("truetype");
+}
+
+body {
+  font-family: "喵啃糖圆", sans-serif;
+}

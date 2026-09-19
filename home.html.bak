@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客</title>
+</head>
+
+<body>
+
+    <h1>我的博客</h1>
+
+    <p>这是我的 Hugo 博客。</p>
+
+</body>
+</html>
