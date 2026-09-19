@@ -22,6 +22,21 @@ body {
   font-family: "喵啃糖圆", "jf-openhuninn", sans-serif;
 }
 
+/* 正文字号：默认 16px，加大两号到 18px（只影响文章内容区，不影响标题导航） */
+.content {
+  font-size: 18px;
+}
+
+/* 主页列表里的日期：默认 14px，跟着提到 16px */
+.content time {
+  font-size: 16px;
+}
+
+/* 顶部导航栏里的博客名字：默认 15px，加大到 18px */
+header ol > li > a {
+  font-size: 18px !important;
+}
+
 body,
 header,
 footer {
