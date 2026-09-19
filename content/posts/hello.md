@@ -16,3 +16,11 @@ date: 2026-09-19
 <img src="/images/stickers/e416a7cc3083641a.png" width="30"> 
 
 ![处男主席](/images/处男主席.jpg)
+
+<br>
+<br>
+
+嗯
+
+![老人们](/images/老人.jpg)
+
