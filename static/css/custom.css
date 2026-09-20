@@ -148,10 +148,10 @@ nav {
 /* ===== 首页右下角的小人 + 对话框竖排文字 ===== */
 .mascot {
   position: fixed;       /* 固定在屏幕右下角，滚动时不动 */
-  /* 右边缘和正文栏对齐：正文栏居中且最宽 48rem，比它窄时退回到页边距 */
-  right: max(calc((100vw - var(--content-width)) / 2), var(--page-gutter));
-  bottom: calc(var(--footer-height) + 8px); /* 抬高到页脚上方，不挡住底部的字 */
-  height: 25vh;          /* 高度 = 屏幕高度的四分之一 */
+  /* 右边缘和正文栏对齐：正文栏居中且最宽 48rem，比它窄时退回到页边距；额外 +36px 让小人往左挪一点 */
+  right: calc(max(calc((100vw - var(--content-width)) / 2), var(--page-gutter)) + 36px);
+  bottom: calc(var(--footer-height) - 12px); /* 比原来低 20px，小人更贴近页脚 */
+  height: 20vh;          /* 高度约为屏幕的五分之一 */
   z-index: 20;
   pointer-events: none;  /* 不挡住下面内容的点击 */
 }
@@ -160,18 +160,23 @@ nav {
   height: 100%;
   width: auto;
   max-width: none;          /* 豁免框架自带的「图片最大宽 100%」限制，防止被压扁 */
-  aspect-ratio: 725 / 600;  /* 钉死图片原始比例，任何环境都不会变形 */
+  aspect-ratio: 835 / 667;  /* 钉死新图片原始比例，任何环境都不会变形 */
   object-fit: contain;      /* 就算空间不够也只整体缩小，绝不拉伸 */
+  transform: translateY(-4%); /* 小人整体往上提一点，和下方的气泡拉开距离 */
   display: block;
 }
 
-/* 竖排文字：位置对准图片右上方的气泡内部 */
-.mascot-text {
+/* 代码画的「想法气泡」：白色大椭圆，正好盖住图片里自带的旧气泡（旧气泡也是白的，被盖住后完全看不见） */
+/* 想调气泡大小：改下面的 width / height 两个百分比就行，文字会自动跟着居中 */
+.mascot-bubble {
   position: absolute;
-  left: 61%;
-  top: 5%;
-  width: 31%;
-  height: 40%;
+  left: 65%;
+  top: -36%;
+  width: 36%;
+  height: 52%;
+  background: #fff;
+  border: 2px solid #d5dae2;   /* 淡灰描边，和原图气泡的描边风格一致 */
+  border-radius: 50%;           /* 圆 = 椭圆形气泡，想法的感觉 */
   display: flex;
   /* safe center 的意思：放得下就居中；字太多装不下时自动改为顶端/右侧对齐 */
   justify-content: safe center;
@@ -181,18 +186,30 @@ nav {
   line-height: 1.15;
   letter-spacing: 0.12em;
   color: #7a8494;
+  padding: 7%;                  /* 让文字离椭圆边缘远一点，不被裁到 */
   overflow: hidden;
 }
 
-/* 手机上小人放大一点，不然气泡文字装不下 */
+/* 气泡下面两颗越来越小的圆点，彼此留出空隙、斜向排向小人的脑袋 = 「在想事情」 */
+.mascot-dot {
+  position: absolute;
+  background: #fff;
+  border: 2px solid #d5dae2;
+  border-radius: 50%;
+  aspect-ratio: 1;              /* 保证是正圆，不会变形 */
+}
+.dot-big   { width: 8.2%; left: 70.9%; top: 11.8%; }
+.dot-small { width: 6.4%; left: 67.8%; top: 21.2%; }
+
+/* 手机上小人整体缩小一点 */
 @media (max-width: 640px) {
   .mascot {
-    height: 24vh;
-    right: 8px;
+    height: 21vh;
+    right: 40px; /* 手机上往左挪一点，别贴着屏幕右边 */
     /* 手机页脚高 96px，原来垫到 104px 显得太高；下移 36px，脚踩进页脚上方的空白区，但不会碰到页脚文字 */
     bottom: calc(var(--footer-height) - 28px);
   }
-  .mascot-text {
+  .mascot-bubble {
     font-size: 14px; /* 手机上字号相应缩小，配合气泡大小 */
   }
 }
@@ -306,6 +323,20 @@ article > h1 {
   margin: 1.75rem 0 0.5rem;
   padding-bottom: 6px;
   border-bottom: 2px dashed #e8b9cc; /* 和主题一致的虚线分隔，粉色 */
+}
+
+/* Archive 页右上角的看板娘：盒子高度为 0，绝对定位悬浮在介绍文字和
+   第一年份之间的空隙里 —— 完全不占布局空间，虚线永远不会被挤下去 */
+.archive-mascot-box {
+  position: relative;
+  height: 0;
+}
+.archive-mascot {
+  position: absolute;
+  right: 28px;               /* 贴正文栏右缘，再往左挪一点 */
+  bottom: -42px;             /* 下移到虚线上方一点点（比悬浮点低 30px，人物贴近虚线） */
+  height: 110px;
+  width: auto;
 }
 
 .archive-item {
@@ -435,6 +466,11 @@ article > h1 {
   .content img {
     max-width: 100%;
     margin-left: 0;
+  }
+
+  /* Archive 页看板娘：手机上缩小一号，继续悬浮右缘 */
+  .archive-mascot {
+    height: 84px;
   }
 
   /* 图片宫格：手机上改成两列（三列太挤），取消左缩进 */

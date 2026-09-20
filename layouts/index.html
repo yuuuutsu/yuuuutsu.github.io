@@ -4,7 +4,9 @@
   {{ if site.Params.mascot.enable }}
     <div class="mascot" aria-hidden="true">
       <img src="{{ site.Params.mascot.image | relURL }}" alt="" />
-      <div class="mascot-text">{{ site.Params.mascot.text }}</div>
+      <div class="mascot-bubble"><span>{{ site.Params.mascot.text }}</span></div>
+      <span class="mascot-dot dot-big"></span>
+      <span class="mascot-dot dot-small"></span>
     </div>
   {{ end }}
 {{ end }}

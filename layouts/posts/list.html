@@ -1,6 +1,11 @@
 {{ define "main" }}
   <div class="content">{{ .Content | emojify }}</div>
 
+  {{/* 档案页右上角的看板娘：悬浮在介绍文字与年份虚线之间的空隙里，不占布局高度 */}}
+  <div class="archive-mascot-box">
+    <img class="archive-mascot" src="/images/yu3.png" alt="" />
+  </div>
+
   {{/* 取 posts 区下所有文章（不管嵌套在哪层文件夹），按年份分组直接展示 */}}
   {{ range (where .Site.RegularPages "Section" "posts").GroupByDate "2006" }}
     <div class="content">

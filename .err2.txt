@@ -1,0 +1,22 @@
+﻿failed to load config: &#34;C:\Users\admin\my-blog\hugo.toml:1:1&#34;: unmarshal failed: toml: invalid character at start of key: U+00EF &#39;ï&#39;
+
+			
+			
+			
+				
+				
+				
+				
+					C:\Users\admin\my-blog\hugo.toml:1:1:
+				
+				
+
+1
+2
+3
+
+
+﻿baseURL = &#39;https://yuuuutsu.github.io/&#39;
+locale = &#39;zh-cn&#39;
+timeZone = &#39;Asia/Shanghai&#39;
+</

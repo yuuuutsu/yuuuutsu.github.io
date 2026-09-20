@@ -20,7 +20,7 @@ theme = "hugo-toigian"
   # 首页右下角的小人 + 对话框竖排文字
   [params.mascot]
     enable = true
-    image = "/images/mascot.png"
+    image = "/images/mascot-nobubble.png"
     # 想改气泡里的字，改下面这一行就行
     text = "。。。"
 
