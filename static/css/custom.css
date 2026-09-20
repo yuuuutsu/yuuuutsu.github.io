@@ -234,10 +234,10 @@ nav {
   display: block;
 }
 
-/* 手机上小人缩小一点 */
+/* 手机上小人稍微放大（比例不变，宽度自动跟随） */
 @media (max-width: 640px) {
   .mascot-left {
-    height: 24vh;
+    height: 32vh;
     left: 8px;
   }
 }
