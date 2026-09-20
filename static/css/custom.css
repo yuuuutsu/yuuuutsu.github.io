@@ -131,6 +131,273 @@ nav {
   margin-top: -1.8em;   /* 负数 = 向上贴近 */
 }
 
+/* ===== 页面留白调整：让顶部别空那么高，内容栏更宽 ===== */
+:root {
+  /* 手机端 */
+  --page-top: 56px;      /* 顶部留白：64 → 56 */
+  --page-gutter: 12px;   /* 左右留白：16 → 12 */
+  --sidebar-top: 64px;   /* 目录悬浮位置跟着上移 */
+  /* 文章一栏的最大宽度：768px → 832px，两边更窄 */
+  --content-width: 52rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    /* 电脑端 */
+    --page-top: 64px;    /* 顶部大空白：192 → 64（顶栏本身高48px，留16px呼吸感） */
+    --page-gutter: 16px; /* 左右留白：24 → 16 */
+  }
+}
+
+/* ===== 首页右下角的小人 + 对话框竖排文字 ===== */
+.mascot {
+  position: fixed;       /* 固定在屏幕右下角，滚动时不动 */
+  /* 右边缘和正文栏对齐：正文栏居中且最宽 48rem，比它窄时退回到页边距 */
+  right: max(calc((100vw - var(--content-width)) / 2), var(--page-gutter));
+  bottom: calc(var(--footer-height) + 8px); /* 抬高到页脚上方，不挡住底部的字 */
+  height: 25vh;          /* 高度 = 屏幕高度的四分之一 */
+  z-index: 20;
+  pointer-events: none;  /* 不挡住下面内容的点击 */
+}
+
+.mascot img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* 竖排文字：位置对准图片右上方的气泡内部 */
+.mascot-text {
+  position: absolute;
+  left: 61%;
+  top: 5%;
+  width: 31%;
+  height: 40%;
+  display: flex;
+  /* safe center 的意思：放得下就居中；字太多装不下时自动改为顶端/右侧对齐 */
+  justify-content: safe center;
+  align-items: safe center;
+  writing-mode: vertical-rl; /* 竖排，从右往左，像漫画 */
+  font-size: 17px;
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  color: #7a8494;
+  overflow: hidden;
+}
+
+/* 手机上小人放大一点，不然气泡文字装不下 */
+@media (max-width: 640px) {
+  .mascot {
+    height: 24vh;
+    right: 8px;
+  }
+  .mascot-text {
+    font-size: 14px; /* 手机上字号相应缩小，配合气泡大小 */
+  }
+}
+
+/* ===== 非首页右下角的迷你深色模式按钮（无背景条，不挡内容） ===== */
+.footer-mini {
+  position: fixed;
+  right: 14px;
+  bottom: 10px;
+  z-index: 30;
+  line-height: 0;          /* 消除按钮底部多余空隙 */
+}
+.footer-mini button {
+  color: #d490a6;
+  opacity: 0.85;           /* 平时淡一点，不抢视线 */
+}
+.footer-mini button:hover {
+  opacity: 1;
+}
+
+/* ===== 首页左下角的第二个小人 ===== */
+.mascot-left {
+  position: fixed;       /* 固定在屏幕左下角，滚动时不动 */
+  /* 左边缘和正文栏对齐，和右下角的小人镜像对称 */
+  left: max(calc((100vw - var(--content-width)) / 2), var(--page-gutter));
+  bottom: 0; /* PC 端再往下贴底；图片底部如有透明边会自然留出空隙 */
+  height: 33vh;          /* 高度 = 屏幕高度的三分之一 */
+  z-index: 20;
+  pointer-events: none;  /* 不挡住下面内容的点击 */
+}
+
+.mascot-left img {
+  /* 加 !important 豁免：不受文章区 .content img 通用样式（限宽/缩进/圆角）影响，否则会变形 */
+  height: 100% !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  display: block;
+}
+
+/* 手机上小人缩小一点 */
+@media (max-width: 640px) {
+  .mascot-left {
+    height: 24vh;
+    left: 8px;
+  }
+}
+
+/* ===== 美化文章标签：去掉 [# ] 符号，改成和 Archive 一样的粉蓝交替胶囊 ===== */
+#tag {
+  display: inline-block;
+  padding: 1px 12px;        /* 底色和文字之间的留白 */
+  margin-right: 8px;        /* 多个标签之间的间距 */
+  margin-top: 4px;
+  border-radius: 999px;      /* 圆角拉满 = 胶囊形状 */
+  font-size: 0.85rem;
+  font-style: normal;        /* 去掉主题自带的斜体 */
+  text-decoration: none;     /* 去掉下划线 */
+}
+
+/* 和列表页相同的两色交替：单数浅粉、双数浅蓝 */
+.section #tag:nth-child(odd) {
+  background-color: #fbe4ee;
+  color: #b0577e !important;
+}
+
+.section #tag:nth-child(even) {
+  background-color: #cfe5f4;
+  color: #4f7392 !important;
+}
+
+#tag:hover {
+  filter: brightness(0.96); /* 悬停时稍微加深 */
+}
+
+/* 去掉主题自带的 [# 和 ] 符号 */
+#tag::before,
+#tag::after {
+  content: none !important;
+}
+
+/* ===== Archive 列表：大标题 + 日期 + 标签胶囊 ===== */
+.archive-year {
+  font-size: 1.6rem;         /* 年份大一号 */
+  font-weight: bold;
+  margin: 1.75rem 0 0.5rem;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed #e8b9cc; /* 和主题一致的虚线分隔，粉色 */
+}
+
+.archive-item {
+  margin: 1.25rem 0;
+}
+
+.archive-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.archive-title {
+  font-size: 1.35rem;  /* 标题写大一点 */
+  font-weight: 900;    /* 最大字重 */
+  -webkit-text-stroke: 0.6px currentColor; /* 描边加粗：字体自带粗体时会更粗，没有时也能显示出粗效果 */
+}
+
+.archive-title:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.archive-tags {
+  margin-top: 6px;     /* 标签紧贴在标题下方，像副标题 */
+}
+
+/* 标签胶囊（列表页专用款：比文章页的更浅、相邻颜色区分） */
+.tag-pill {
+  display: inline-block;
+  padding: 1px 12px;
+  margin-right: 8px;
+  margin-top: 4px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.archive-tags .tag-pill:nth-child(odd) {
+  background-color: #fbe4ee; /* 浅粉 */
+  color: #b0577e !important;
+}
+
+.archive-tags .tag-pill:nth-child(even) {
+  background-color: #cfe5f4; /* 更蓝一点，和浅蓝背景拉开差距 */
+  color: #4f7392 !important;
+}
+
+.tag-pill:hover {
+  filter: brightness(0.96); /* 悬停时稍微加深 */
+}
+
+/* 去掉文章区链接自带的 { } 符号（否则标题和胶囊两侧会多出花括号） */
+.content a.archive-title::before,
+.content a.archive-title::after,
+.content a.tag-pill::before,
+.content a.tag-pill::after {
+  content: none !important;
+}
+
+/* ===== 图库首页：相册卡片（封面图 + 相册名） ===== */
+.gallery-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+  margin-top: 8px;
+}
+
+.gallery-card {
+  display: block;
+  text-decoration: none;
+}
+
+/* 链接自带的 { } 符号也挡掉 */
+.gallery-card::before,
+.gallery-card::after {
+  content: none !important;
+}
+
+.gallery-card img {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4 / 3;       /* 统一 4:3 封面比例 */
+  object-fit: cover;
+  margin: 0 !important;      /* 覆盖 .content img 的缩进 */
+  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.03);
+}
+
+/* 相册名：和封面图左边缘对齐 */
+.gallery-card-name {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #d490a6;
+}
+
+.gallery-card:hover .gallery-card-name {
+  text-decoration: underline;
+}
+
+/* 相册里还没有图片时的占位块 */
+.gallery-card-empty {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  border: 1px dashed rgba(128, 128, 128, 0.4);
+}
+
 /* ===== 手机端适配：屏幕窄于 640px 时生效，电脑端不受影响 ===== */
 @media (max-width: 640px) {
   /* 保险：禁止横向滚动，页面宽度永远等于手机屏宽 */
@@ -155,6 +422,13 @@ nav {
   /* 四宫格在手机上保持 2x2，不变 */
 
   /* 收紧缩进：手机上取消所有宫格的左缩进 */
+  .gallery-cards {
+    grid-template-columns: repeat(2, 1fr); /* 手机上固定两列，每张卡片约半屏宽 */
+    gap: 14px;
+  }
+  .gallery-card-name {
+    font-size: 0.95rem;
+  }
   .content p:has(> img),
   .content p:has(+ p > img) {
     margin-left: 0;

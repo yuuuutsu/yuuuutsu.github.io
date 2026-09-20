@@ -1,0 +1,36 @@
+{{ define "main" }}
+  {{ $exts := slice ".jpg" ".jpeg" ".png" ".gif" ".webp" ".svg" ".avif" }}
+  {{ $albums := where .Pages "Kind" "section" }}
+  {{ if gt (len $albums) 0 }}
+    {{/* 图库首页：每个相册一张卡片（封面 = 相册文件夹里名字排序后的第一张图） */}}
+    <div class="content">{{ .Content | emojify }}</div>
+    <div class="content">
+      <div class="gallery-cards">
+        {{ range sort $albums "Title" }}
+          {{ $name := .File.ContentBaseName }}
+          {{ $cover := "" }}
+          {{ $res := try (readDir (printf "static/images/%s" $name)) }}
+          {{ if not $res.Err }}
+            {{ range sort $res.Value "Name" }}
+              {{ $ext := lower (path.Ext .Name) }}
+              {{ if and (not $cover) (in $exts $ext) }}
+                {{ $cover = printf "/images/%s/%s" $name .Name }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          <a class="gallery-card" href="{{ .RelPermalink }}">
+            {{ if $cover }}
+              <img src="{{ $cover }}" alt="{{ .Title }}" loading="lazy">
+            {{ else }}
+              <div class="gallery-card-empty"></div>
+            {{ end }}
+            <span class="gallery-card-name">{{ .Title }}</span>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  {{ else }}
+    {{/* 相册页本身：照常渲染正文（整页图片墙） */}}
+    <div class="content">{{ .Content | emojify }}</div>
+  {{ end }}
+{{ end }}

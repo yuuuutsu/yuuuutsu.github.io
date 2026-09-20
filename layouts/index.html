@@ -1,0 +1,10 @@
+{{ define "main" }}
+  {{ .Content }}
+
+  {{ if site.Params.mascot.enable }}
+    <div class="mascot" aria-hidden="true">
+      <img src="{{ site.Params.mascot.image | relURL }}" alt="" />
+      <div class="mascot-text">{{ site.Params.mascot.text }}</div>
+    </div>
+  {{ end }}
+{{ end }}

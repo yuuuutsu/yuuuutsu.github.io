@@ -1,6 +1,7 @@
 ---
-title: "01"
+title: "金光御九界日志|01"
 date: 2026-09-19
+tags: ["游戏"]
 ---
 
 <span style="font-size: 24px;">🎉恭喜雪碧和好啦(ﾉ>ω<)ﾉ</span>

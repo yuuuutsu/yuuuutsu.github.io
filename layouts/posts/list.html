@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <div class="content">{{ .Content | emojify }}</div>
+
+  {{/* 取 posts 区下所有文章（不管嵌套在哪层文件夹），按年份分组直接展示 */}}
+  {{ range (where .Site.RegularPages "Section" "posts").GroupByDate "2006" }}
+    <div class="content">
+      <div class="archive-year">{{ .Key }}</div>
+      {{ range .Pages.ByDate.Reverse }}
+        <div class="archive-item">
+          <div class="archive-item-head">
+            <a href="{{ .RelPermalink }}" class="archive-title">{{ .Title | emojify }}</a>
+            <span class="text-muted text-sm whitespace-nowrap">{{ partial "date" .Date }}</span>
+          </div>
+          {{ $tags := .GetTerms "tags" }}
+          {{ if $tags }}
+            <div class="archive-tags">
+              {{ range $tags }}
+                <a href="{{ .RelPermalink }}" class="tag-pill">{{ .LinkTitle }}</a>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}

@@ -11,9 +11,18 @@ theme = "hugo-toigian"
   toc = true
   # 评论开关（未配置评论服务，先关闭）
   comments = false
+  # 博客建立日期（页脚会显示「从这天到今天共多少天」）
+  blogStart = "2026-09-19"
   [params.author]
     name = "Blogger"
     email = "me@example.com"
+
+  # 首页右下角的小人 + 对话框竖排文字
+  [params.mascot]
+    enable = true
+    image = "/images/mascot.png"
+    # 想改气泡里的字，改下面这一行就行
+    text = "。。。"
 
 # 文章里的 Markdown 语法设置
 [markup]
