@@ -151,7 +151,7 @@ nav {
   /* 右边缘和正文栏对齐：正文栏居中且最宽 48rem，比它窄时退回到页边距；额外 +36px 让小人往左挪一点 */
   right: calc(max(calc((100vw - var(--content-width)) / 2), var(--page-gutter)) + 36px);
   bottom: calc(var(--footer-height) - 12px); /* 比原来低 20px，小人更贴近页脚 */
-  height: 20vh;          /* 高度约为屏幕的五分之一 */
+  height: 18vh;          /* 高度约为屏幕的五分之一，再缩小一档 */
   z-index: 20;
   pointer-events: none;  /* 不挡住下面内容的点击 */
 }
@@ -204,7 +204,7 @@ nav {
 /* 手机上小人整体缩小一点 */
 @media (max-width: 640px) {
   .mascot {
-    height: 21vh;
+    height: 17vh; /* 手机上比电脑端缩得更多 */
     right: 40px; /* 手机上往左挪一点，别贴着屏幕右边 */
     /* 手机页脚高 96px，原来垫到 104px 显得太高；下移 36px，脚踩进页脚上方的空白区，但不会碰到页脚文字 */
     bottom: calc(var(--footer-height) - 28px);
@@ -335,8 +335,8 @@ article > h1 {
   position: absolute;
   right: 28px;               /* 贴正文栏右缘，再往左挪一点 */
   bottom: -42px;             /* 下移到虚线上方一点点（比悬浮点低 30px，人物贴近虚线） */
-  height: 110px;
-  width: auto;
+  width: 64px;               /* 比原比例略压扁，但不过分 */
+  height: 92px;
 }
 
 .archive-item {
@@ -468,9 +468,10 @@ article > h1 {
     margin-left: 0;
   }
 
-  /* Archive 页看板娘：手机上缩小一号，继续悬浮右缘 */
+  /* Archive 页看板娘：手机上同样压扁缩小 */
   .archive-mascot {
-    height: 84px;
+    width: 50px;
+    height: 72px;
   }
 
   /* 图片宫格：手机上改成两列（三列太挤），取消左缩进 */
