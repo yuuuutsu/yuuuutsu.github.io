@@ -127,10 +127,6 @@ nav {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.content p:has(> img) {
-  margin-top: -1.8em;   /* 负数 = 向上贴近 */
-}
-
 /* ===== 页面留白调整：让顶部别空那么高，内容栏更宽 ===== */
 :root {
   /* 手机端 */
