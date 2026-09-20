@@ -25,7 +25,7 @@
           </svg>
         </a>
       </nav>
-      <span class="text-muted hidden md:block">
+      <span class="text-muted">
         &copy;
         {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}
         · {{ $days }}Days

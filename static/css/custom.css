@@ -159,6 +159,9 @@ nav {
 .mascot img {
   height: 100%;
   width: auto;
+  max-width: none;          /* 豁免框架自带的「图片最大宽 100%」限制，防止被压扁 */
+  aspect-ratio: 725 / 600;  /* 钉死图片原始比例，任何环境都不会变形 */
+  object-fit: contain;      /* 就算空间不够也只整体缩小，绝不拉伸 */
   display: block;
 }
 
@@ -186,6 +189,8 @@ nav {
   .mascot {
     height: 24vh;
     right: 8px;
+    /* 手机页脚高 96px，原来垫到 104px 显得太高；下移 36px，脚踩进页脚上方的空白区，但不会碰到页脚文字 */
+    bottom: calc(var(--footer-height) - 28px);
   }
   .mascot-text {
     font-size: 14px; /* 手机上字号相应缩小，配合气泡大小 */
@@ -268,6 +273,30 @@ nav {
 #tag::before,
 #tag::after {
   content: none !important;
+}
+
+/* ===== 文章页头部：日期+字数一行，tag 一行，下方虚线分隔正文 ===== */
+article > h1 {
+  margin-bottom: 0.25rem;
+  padding-bottom: 0;
+  line-height: 1.2;
+}
+
+/* tag 单独一行，行距最小化 */
+.post-meta .section {
+  display: block;
+  margin-top: 2px;
+}
+
+/* 字数统计：跟在日期后面，字号颜色和日期一致 */
+.post-count {
+  margin-left: 6px;
+}
+
+/* 头部信息与正文之间的虚线分隔（和 Archive 年份下的虚线完全同款：2px 粉色虚线） */
+.post-divider {
+  margin: 10px 0 1.25rem;
+  border-bottom: 2px dashed #e8b9cc;
 }
 
 /* ===== Archive 列表：大标题 + 日期 + 标签胶囊 ===== */
@@ -433,5 +462,12 @@ nav {
   /* 正文字号在手机上略降一号，避免每行只有几个字 */
   .content {
     font-size: 16px;
+  }
+
+  /* 手机上文章页标题（h1）缩小：主题默认 36px 太大了 */
+  article > h1 {
+    font-size: 1.5rem;   /* 24px */
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
   }
 }

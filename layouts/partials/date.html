@@ -1,0 +1,6 @@
+{{ if ne (. | time.Format "2006/01/02") "0001/01/01" }}
+<time
+  datetime="{{ . | time.Format "2006/01/02" }}"
+  class="text-sm tabular-nums text-muted"
+  >{{ . | time.Format (default "2006/01/02" site.Params.dateFormat) }}</time>
+{{ end }}

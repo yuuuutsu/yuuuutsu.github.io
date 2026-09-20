@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <h1>{{ .Title | emojify }}</h1>
+  <!-- Post meta：日期+字数一行，tag 单独一行，下方虚线分隔正文 -->
+  <div class="post-meta">
+    {{- partial "date" .Date -}}{{ if ne .Date .Lastmod }}<nobr class="text-sm text-muted">&#8674&nbsp;</nobr>{{- partial "date" .Lastmod -}}{{ end }}
+    {{ if eq .Section "posts" }}<span class="text-sm tabular-nums text-muted post-count">{{ .Content | plainify | countrunes }}字</span>{{ end }}
+    {{- partial "tag" . -}}
+  </div>
+  <div class="post-divider" aria-hidden="true"></div>
+  {{- partial "toc.html" . -}}
+  <!-- Content -->
+  {{- partial "custom/content-before.html" . -}}
+  <div class="content">{{ .Content | emojify }}</div>
+  {{- partial "custom/content-after.html" . -}}
+  <!-- Comments block -->
+  {{ if and .Content (default true (default .Site.Params.comments
+    .Params.comments))
+  }}
+    <div class="mt-16">{{- partial "comments" . -}}</div>
+  {{ end }}
+{{ end }}
