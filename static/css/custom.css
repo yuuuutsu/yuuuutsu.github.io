@@ -501,13 +501,22 @@ article > h1 {
 
 .archive-item-head {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* 日期在前、标题在后，都靠左 */
   align-items: baseline;
-  gap: 12px;
+  gap: 10px;
+}
+
+/* 日期（不含年份，年份由分组标题提供），字号和标题一致 */
+.archive-item-head .archive-date {
+  font-size: 1.1rem;
+  color: #7a8494;
+  font-variant-numeric: tabular-nums; /* 数字等宽，多行排列时上下对齐 */
+  flex-shrink: 0;
+  width: 56px;         /* 钉死宽度：让所有行的标题、下方的标签都对齐同一位置 */
 }
 
 .archive-title {
-  font-size: 1.35rem;  /* 标题写大一点 */
+  font-size: 1.1rem;  /* 标题缩小一号（原来 1.35rem） */
   font-weight: 900;    /* 最大字重 */
   -webkit-text-stroke: 0.6px currentColor; /* 描边加粗：字体自带粗体时会更粗，没有时也能显示出粗效果 */
 }
@@ -518,10 +527,15 @@ article > h1 {
 }
 
 .archive-tags {
-  margin-top: 6px;     /* 标签紧贴在标题下方，像副标题 */
+  margin-top: 2px;                       /* 标签紧贴标题，行距更近 */
+  margin-left: 66px;                     /* 56px 日期宽 + 10px 间距 = 和标题左缘对齐 */
 }
 
+/* Archive 列表里的标签：格式与正文里显示的一致（不缩小、不变淡） */
+
 /* 标签胶囊（列表页专用款：比文章页的更浅、相邻颜色区分） */
+/* 写成 .content a.tag-pill 是为了压过主题的 `.content a { padding:4px }`，否则胶囊会被压短 */
+.content a.tag-pill,
 .tag-pill {
   display: inline-block;
   padding: 1px 12px;

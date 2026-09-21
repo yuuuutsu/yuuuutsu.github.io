@@ -13,8 +13,8 @@
       {{ range .Pages.ByDate.Reverse }}
         <div class="archive-item">
           <div class="archive-item-head">
+            <span class="archive-date text-sm whitespace-nowrap">{{ .Date.Format "01/02" }}</span>
             <a href="{{ .RelPermalink }}" class="archive-title">{{ .Title | emojify }}</a>
-            <span class="text-muted text-sm whitespace-nowrap">{{ partial "date" .Date }}</span>
           </div>
           {{ $tags := .GetTerms "tags" }}
           {{ if $tags }}

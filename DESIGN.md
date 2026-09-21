@@ -31,7 +31,7 @@
   - 列表日期 `.content time`：16px
   - 顶栏博客名：18px
   - 文章标题 `article > h1`：电脑端主题默认，手机 1.5rem、line-height 1.3
-  - Archive 年份：1.6rem bold；Archive/标签页文章标题 `.archive-title`：1.35rem / font-weight 900 / 0.6px 描边
+  - Archive 年份：1.6rem bold；Archive/标签页文章标题 `.archive-title`：1.1rem / font-weight 900 / 0.6px 描边；日期 `.archive-date` 在标题**前面**（字号与标题一致 1.1rem、灰色 #7a8494、等宽数字、不含年份——年份由分组标题提供，格式 01/02）
   - 气泡文字：17px 竖排（手机 14px），`writing-mode: vertical-rl`，letter-spacing 0.12em
 
 ## 4. 间距与布局
@@ -52,10 +52,11 @@
 `border-bottom: 2px dashed #e8b9cc;` —— 用于：文章头部 `.post-divider`（margin 10px 0 1.25rem）、Archive 年份 `.archive-year`（padding-bottom 6px）。任何新分隔线都用这一款。
 
 ### 5.2 标签胶囊
-- 形状：`border-radius: 999px; padding: 1px 12px; font-size: 0.85rem;`，右间距 8px。
+- 形状：`.content a.tag-pill`（带 `.content` 前缀压过主题的 `.content a { padding:4px }`，否则胶囊被压短）：`border-radius: 999px; padding: 1px 12px; font-size: 0.85rem;`，右间距 8px。
 - 颜色按顺序粉蓝交替：奇数粉（`#fbe4ee`/`#b0577e`），偶数蓝（`#cfe5f4`/`#4f7392`）。
 - 禁止 `[# ]`、`{ }` 等装饰符号（用 `::before/::after content:none` 挡掉）。
 - 悬停：`filter: brightness(0.96)`。
+- **Archive/标签列表页**：`.archive-date` 固定宽 56px 钉住标题起始位置；`.archive-tags { margin-top: 2px; margin-left: 66px }`（56+10 间距）让标签与标题左缘对齐、紧贴标题；标签格式与正文一致（不缩小不变淡），粉蓝交替色不变。
 
 ### 5.3 翻页按钮 `.post-nav-btn`
 按钮区顶部有全站同款虚线：`border-top: 2px dashed #e8b9cc` + `padding-top: 28px`（虚线与按钮间距）。
