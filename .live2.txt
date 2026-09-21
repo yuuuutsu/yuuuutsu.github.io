@@ -1,0 +1,25 @@
+﻿.archive-item-head {
+  display: flex;
+  justify-content: flex-start; /* 日期在前、标题在后，都靠左 */
+  align-items: baseline;
+  gap: 10px;
+}
+
+/* 日期（不含年份，年份由分组标题提供），字号和标题一致 */
+.archive-item-head .archive-date {
+  font-size: 1.1rem;
+  color: #7a8494;
+  font-variant-numeric: tabular-nums; /* 数字等宽，多行排列时上下对齐 */
+  flex-shrink: 0;
+  width: 56px;         /* 钉死宽度：让所有行的标题、下方的标签都对齐同一位置 */
+}
+
+.archive-title {
+  font-size
+.archive-title {
+  font-size: 1.1rem;  /* 标题缩小一号（原来 1.35rem） */
+  font-weight: 900;    /* 最大字重 */
+  -webkit-text-stroke: 0.6px currentColor; /* 描边加粗：字体自带粗体时会更粗，没有时也能显示出粗效果 */
+}
+
+.archive-title:hover {

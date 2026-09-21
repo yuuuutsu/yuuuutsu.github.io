@@ -90,57 +90,6 @@ a {
   font-style: normal;
 }
 
-/* ===== 恢复滚动条：主题默认隐藏（width:0），改回粉色细条 ===== */
-::-webkit-scrollbar {
-  width: 8px;              /* 恢复显示，细一点不占地方 */
-}
-::-webkit-scrollbar-thumb {
-  background: #e8b9cc;     /* 全站同款粉色 */
-  border-radius: 999px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-html {
-  scrollbar-width: thin;               /* Firefox 也显示细滚动条 */
-  scrollbar-color: #e8b9cc transparent;
-}
-
-/* ===== 移动端可用的注释气泡：桌面悬停、手机点按都会显示 ===== */
-/* 用法：<u class="tip" tabindex="0" data-tip="注释文字">正文文字</u> */
-.content .tip {
-  position: relative;
-  cursor: help;
-}
-.content .tip::after {
-  content: attr(data-tip);
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 8px);
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: 260px;
-  padding: 6px 12px;
-  background: #fff;
-  border: 2px solid #e8b9cc;  /* 做成想法气泡的样子 */
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-style: normal;
-  line-height: 1.5;
-  color: #b0577e;
-  white-space: normal;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.15s;
-  z-index: 30;
-  pointer-events: none;
-}
-.content .tip:hover::after,
-.content .tip:focus::after {
-  opacity: 1;
-  visibility: visible;
-}
-
 @font-face {
   font-family: "喵啃糖圆";
   src: url("/fonts/喵啃糖圆.ttf") format("truetype");

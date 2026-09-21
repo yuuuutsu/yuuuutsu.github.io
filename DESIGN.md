@@ -60,7 +60,7 @@
 
 ### 5.3 翻页按钮 `.post-nav-btn`
 按钮区顶部有全站同款虚线：`border-top: 2px dashed #e8b9cc` + `padding-top: 28px`（虚线与按钮间距）。
-虚线胶囊：2px dashed `#e8b9cc`、圆角 999px、内边距 10px 28px、字色 `#b0577e`、底色 `rgba(251,228,238,.35)`；悬停底色变实 `#fbe4ee` + 上浮 2px。两按钮**两端对齐**：实现方式是模板里给按钮加 `post-nav-prev` / `post-nav-next` 类，`.post-nav-next { margin-left: auto }` 推到最右——单独的下一篇在右、单独的上一篇在左、两个都在时一左一右（不要用 `space-between`，单按钮时会贴错边）。上下留白 90px / 110px。手机端缩小一号：内边距 6px 18px、字号 0.85rem、描边 1.5px、上下留白 60px / 80px。注意选择器必须是 `.post-nav`（写成 `.nav` 会撞主题顶部导航样式且失效）。
+虚线胶囊：2px dashed `#e8b9cc`、圆角 999px、内边距 10px 28px、字色 `#b0577e`、底色 `rgba(251,228,238,.35)`；悬停底色变实 `#fbe4ee` + 上浮 2px。两按钮**两端对齐**：实现方式是模板里给按钮加 `post-nav-prev` / `post-nav-next` 类，`.post-nav-next { margin-left: auto }` 推到最右——单独的下一篇在右、单独的上一篇在左、两个都在时一左一右（不要用 `space-between`，单按钮时会贴错边）。**方向语义**：上一篇=更旧的文章、下一篇=更新的文章；Hugo 的 `.Prev` 指向更旧的、`.Next` 指向更新的（和直觉相反），所以模板里「← 上一篇」用 `$sibs.Prev`、「下一篇 →」用 `$sibs.Next`，别写反。上下留白 90px / 110px。手机端缩小一号：内边距 6px 18px、字号 0.85rem、描边 1.5px、上下留白 60px / 80px。注意选择器必须是 `.post-nav`（写成 `.nav` 会撞主题顶部导航样式且失效）。
 
 ### 5.4 页脚（三种形态，别混用）
 1. **首页**：固定屏幕底部、整条铺满；内容**贴右**（`max-width: var(--content-width)` 居中 + `flex-end`，右缘与正文对齐），文字与深色按钮间距 12px。
@@ -84,6 +84,14 @@
 - 结构：左侧站名品牌 `.nav-brand`（粉描边白色小圆点记号 + 站名，圆点呼应想法气泡；站名自动取 hugo.toml 的 title），右侧菜单 `.nav-links`（无编号，全小写，菜单名在 hugo.toml `[menu.nav]` 配置）。
 - 不再显示面包屑和当前文章标题；当前栏目自动加粗 + 粉色虚线下划线（悬停时虚线从左滑出）。
 - 手机端：间距收紧。选择器用 `.site-nav`，勿用 `.nav`（会撞主题顶部导航样式）。
+
+- 滚动条：主题默认隐藏（`::-webkit-scrollbar { width: 0 }`），custom.css 已恢复为 8px 粉色细条（`#e8b9cc`），勿删。
+
+### 5.9 注释气泡 shortcode `tip`（移动端可用的 title 替代）
+- 背景：`<span title="...">` 在手机上不显示（触屏没有 hover）。
+- 用法：`{{</* tip note="注释文字" */>}}正文文字{{</* /tip */>}}`，渲染为 `<u class="tip" tabindex="0" data-tip="...">`。
+- 样式：正文带下划线；桌面悬停 / 手机点按弹出白色粉边小气泡（想法气泡风），点别处关闭。
+- 样式表在 custom.css 的 `.content .tip` 区块。
 
 ### 5.8 图库卡片 `.gallery-card`
 封面 `aspect-ratio: 4/3` + `object-fit: cover`、圆角 10px、1px 淡灰描边；悬停 `scale(1.03)`；相册名 1.1rem bold 粉色 `#d490a6`。桌面 `repeat(auto-fill, minmax(240px,1fr))` gap 28px；手机固定两列 gap 14px。相册内页图片墙必须保留灯箱（图库首页卡片不加，避免拦截点击）。
