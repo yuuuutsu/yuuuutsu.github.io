@@ -1,2 +1,0 @@
-﻿post-nav-btn post-nav-prev" href="/posts/01/"
-post-nav-btn post-nav-next" href="/posts/02/"
