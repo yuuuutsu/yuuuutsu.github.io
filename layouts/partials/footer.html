@@ -1,116 +1,62 @@
+{{/* 是否显示流动页脚：文章(posts)、相册(gallery)、关于(about) */}}
+{{ $inflow := false }}
+{{ if or (eq .Section "posts") (eq .Section "gallery") }}{{ $inflow = true }}{{ end }}
+{{ if eq .Kind "page" }}{{ if eq .File.ContentBaseName "about" }}{{ $inflow = true }}{{ end }}{{ end }}
+
 {{ if .IsHome }}
 <footer class="fixed left-0 bottom-0 w-full bg-base px-page-gutter">
   {{ $start := time.AsTime (site.Params.blogStart | default "2026-09-19") }}
   {{ $days := add (div (sub now.Unix $start.Unix) 86400) 1 }}
   <div class="flex justify-center items-center h-footer-height">
-    <div
-      class="flex flex-row w-full max-w-content justify-between lowercase italic gap-3"
-    >
-      <nav>
-        <a href="{{ .Site.BaseURL }}/index.xml"
-          ><svg
-            width="18px"
-            height="18px"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
-        </a>
-      </nav>
+    <div class="home-footer-inner lowercase italic gap-3">
       <span class="text-muted">
         &copy;
         {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}
         · {{ $days }}Days
-        <a
-          href="https://github.com/ntk148v/hugo-toigian"
-          class="font-bold hover:underline"
-          >{{ T "footer_text" | default "hugo-toigian" }}</a
-        >
+        <span class="font-bold">{{ T "footer_text" | default "hugo-toigian" }}</span>
       </span>
-      <button id="header-theme-button" aria-label="Toggle Dark Mode" tabindex="0" class="focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg p-1">
-        <svg
-          id="dark_mode_btn"
-          class="hidden toolbox-btn"
-          width="18px"
-          height="18px"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
-          />
+      <button id="header-theme-button" aria-label="Toggle Dark Mode" tabindex="0" class="home-footer-toggle focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg p-1">
+        <svg id="dark_mode_btn" class="hidden toolbox-btn" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
         </svg>
-        <svg
-          id="light_mode_btn"
-          class="hidden toolbox-btn"
-          width="18px"
-          height="18px"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-          />
+        <svg id="light_mode_btn" class="hidden toolbox-btn" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
         </svg>
       </button>
     </div>
   </div>
 </footer>
+{{ else if $inflow }}
+<!-- 文章 / 相册 / 关于页：页脚不固定，跟在正文后面（正文先留白，页脚最后出现） -->
+<footer class="inflow-footer bg-base">
+  {{ $start := time.AsTime (site.Params.blogStart | default "2026-09-19") }}
+  {{ $days := add (div (sub now.Unix $start.Unix) 86400) 1 }}
+  <div class="inflow-footer-inner">
+    <span class="text-muted">
+      &copy;
+      {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}
+      · {{ $days }}Days
+      <span class="font-bold">{{ T "footer_text" | default "hugo-toigian" }}</span>
+    </span>
+    <button id="header-theme-button" aria-label="Toggle Dark Mode" tabindex="0" class="inflow-footer-toggle focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg p-1">
+      <svg id="dark_mode_btn" class="hidden toolbox-btn" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+      </svg>
+      <svg id="light_mode_btn" class="hidden toolbox-btn" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+      </svg>
+    </button>
+  </div>
+</footer>
 {{ else }}
-<!-- 非首页：不显示整条页脚（避免挡住文章内容），只保留一个小的深色模式按钮 -->
+<!-- 其他页面（标签、归档列表等）：不显示整条页脚，只保留一个小的深色模式按钮 -->
 <div class="footer-mini">
   <button id="header-theme-button" aria-label="Toggle Dark Mode" tabindex="0" class="focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg p-1">
-    <svg
-      id="dark_mode_btn"
-      class="hidden toolbox-btn"
-      width="18px"
-      height="18px"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
-      />
+    <svg id="dark_mode_btn" class="hidden toolbox-btn" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
     </svg>
-    <svg
-      id="light_mode_btn"
-      class="hidden toolbox-btn"
-      width="18px"
-      height="18px"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-      />
+    <svg id="light_mode_btn" class="hidden toolbox-btn" width="18px" height="18px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
     </svg>
   </button>
 </div>

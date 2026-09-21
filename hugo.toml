@@ -52,7 +52,7 @@ theme = "hugo-toigian"
     url = "/posts"
     weight = 2
   [[menu.nav]]
-    name = "图库"
+    name = "Gallery"
     url = "/gallery"
     weight = 3
 

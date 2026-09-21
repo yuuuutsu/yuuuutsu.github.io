@@ -1,40 +1,17 @@
-<div
-  class="lowercase italic mx-auto flex w-full max-w-content items-center justify-between"
->
-  <nav class="mr-3">
-    <ol class="flex text-md items-center">
-      {{/* 精简面包屑：只显示上一级 + 当前页 */}}
-      {{ $parent := .Parent }}
-      {{ if and $parent $parent.IsHome }}
-        {{/* 上一级是首页：显示首页名 */}}
-        <li>
-          <a href="{{ $parent.RelPermalink }}" class="text-muted focus:underline focus:outline-none pr-1 whitespace-nowrap">{{ $parent.Site.Title }}</a>
-        </li>
-        <li class="text-muted pr-1 whitespace-nowrap">/</li>
-      {{ else if $parent }}
-        {{/* 上一级是普通栏目/分类：显示它 */}}
-        <li>
-          <a href="{{ $parent.RelPermalink }}" class="text-muted focus:underline focus:outline-none pr-1 whitespace-nowrap">{{ $parent.Title }}</a>
-        </li>
-        <li class="text-muted pr-1 whitespace-nowrap">/</li>
-      {{ end }}
-      {{ $curAttr := "focus:underline focus:outline-none font-bold pr-1 hidden md:block" }}
-      {{ if not $parent }}
-        {{/* 没有上级的页面（首页等）当前项照常显示 */}}
-        {{ $curAttr = "focus:underline focus:outline-none font-bold pr-1" }}
-      {{ end }}
-      <li>
-        <a href="{{ .RelPermalink }}" class="{{ $curAttr }}">{{ .Title }}</a>
-      </li>
-    </ol>
-  </nav>
-  <nav class="ml-3">
-    <ul class="flex text-md whitespace-nowrap">
+{{/* 简洁版顶栏：左侧站名品牌（带气泡圆点记号），右侧编号菜单。
+     不再显示面包屑和当前文章标题——导航永远只有「站名 + 四个栏目」。 */}}
+<div class="site-nav">
+  <a class="nav-brand" href="{{ $.Site.Home.RelPermalink }}">{{ $.Site.Title }}</a>
+  <nav aria-label="主导航">
+    <ul class="nav-links">
+      {{ $cur := .RelPermalink }}
       {{ range $.Site.Menus.nav }}
-        <li class="pl-2">
-          <a href="{{ .URL | relURL }}" class="tracking-wide hover:underline"
-            >{{ .Name }}</a
-          >
+        {{ $url := .URL | relURL }}
+        {{/* 当前页高亮：完全相等，或处于该栏目之下（首页除外） */}}
+        {{ $active := eq $cur $url }}
+        {{ if and (not $active) (ne $url "/") (hasPrefix $cur $url) }}{{ $active = true }}{{ end }}
+        <li>
+          <a href="{{ $url }}"{{ if $active }} class="active"{{ end }}>{{ .Name }}</a>
         </li>
       {{ end }}
     </ul>

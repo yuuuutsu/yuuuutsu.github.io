@@ -30,7 +30,8 @@
       </div>
     </div>
   {{ else }}
-    {{/* 相册页本身：照常渲染正文（整页图片墙） */}}
+    {{/* 相册页本身：照常渲染正文（整页图片墙），并引入灯箱（点击图片放大） */}}
     <div class="content">{{ .Content | emojify }}</div>
+    {{- partial "custom/content-after.html" . -}}
   {{ end }}
 {{ end }}
