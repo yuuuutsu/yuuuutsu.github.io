@@ -4,10 +4,10 @@ import { getDatabase, onValue, push, ref } from "https://www.gstatic.com/firebas
 const firebaseConfig = { apiKey: "AIzaSyAynCP6hcb1dn5XGewLXrT5prwFKLRIb1o", authDomain: "yuuuutsu-blog.firebaseapp.com", databaseURL: "https://yuuuutsu-blog-default-rtdb.firebaseio.com", projectId: "yuuuutsu-blog", storageBucket: "yuuuutsu-blog.firebasestorage.app", messagingSenderId: "511996034685", appId: "1:511996034685:web:131559dd234451fb4d3b14" };
 
 /* 想换表情就只改这一行（表情要用 Twemoji 扁平图，svg 放在 /images/emoji/ 里） */
-const EMOJIS = ["🥳", "😭", "😯", "😙", "🙏", "👏", "🩵", "🩷", "🍑", "🎊"];
+const EMOJIS = ["🥳", "😭", "👴", "🙏", "🩵", "🩷", "🍑", "🍮", "🧸", "⚰️", "🌙", "🎶", "⁉️"];
 
 /* 布局常量（和 custom.css 保持一致） */
-const EMOJI_W = 22, GAP = 7, MAX_ROWS = 3, ROW_H = EMOJI_W + GAP;
+const EMOJI_W = 22, GAP = 5, MAX_ROWS = 3, ROW_H = EMOJI_W + GAP;
 
 const root = document.querySelector(".post-reactions");
 
