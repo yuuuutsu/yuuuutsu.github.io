@@ -190,6 +190,10 @@
   },
   "active": "03039c7e5d2b0bd1",
   "lastOpenFiles": [
+    "public/js/reactions.js",
+    "static/js/reactions.js",
+    "static/js",
+    "layouts/partials/reactions.html",
     "content/posts/02.md",
     "public/images/金光御九界日志/胧雷11.jpg",
     "static/images/金光御九界日志/胧雷11.jpg",
@@ -208,9 +212,6 @@
     "static/images/金光御九界日志/未确认 494208.crdownload",
     "static/images/金光御九界日志/未确认 836332.crdownload",
     "static/images/金光御九界日志/未确认 490558.crdownload",
-    "static/images/金光御九界日志/未确认 203927.crdownload",
-    "static/images/金光御九界日志/未确认 794128.crdownload",
-    "static/images/金光御九界日志/未确认 101705.crdownload",
     "2026-09-21.md",
     "content/posts/01.md",
     "content/posts/02 - 副本.md"

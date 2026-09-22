@@ -13,6 +13,7 @@
   <div class="content">{{ .Content | emojify }}</div>
   {{- partial "custom/content-after.html" . -}}
   {{ if eq .Section "posts" }}
+    {{- partial "reactions.html" . -}}
     <!-- 文章末尾：上一篇 / 下一篇（前后各留一大段空白，只在 posts 区内切换） -->
     {{ $sibs := .CurrentSection.RegularPages }}
     <nav class="post-nav">

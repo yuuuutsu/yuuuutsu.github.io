@@ -4,6 +4,9 @@ timeZone = 'Asia/Shanghai'
 title = '有信心'
 theme = "hugo-toigian"
 
+# 生成 robots.txt（配合 layouts/robots.txt 让搜索引擎不收录）
+enableRobotsTXT = true
+
 [params]
   # 网站图标（浏览器标签页上的小标志）
   favicon = "/favicon.jpg"

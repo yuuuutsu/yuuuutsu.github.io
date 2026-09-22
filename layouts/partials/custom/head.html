@@ -1,3 +1,6 @@
+{{/* 自定义样式：带版本号强制刷新缓存 */}}
+<link rel="stylesheet" href="/css/custom.css?v=20260923e" />
+
 {{/* 自定义样式：全站禁用斜体 */}}
 <style>
   * {
@@ -18,6 +21,9 @@
 <style>
   #header-theme-button { display: none !important; }
 </style>
+
+{{/* 告诉搜索引擎：不要收录这个页面的内容，也不要顺着链接爬 */}}
+<meta name="robots" content="noindex, nofollow" />
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />

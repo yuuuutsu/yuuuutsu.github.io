@@ -291,7 +291,12 @@ figure {
   }
 
   img {
-    @apply my-4;
+    @apply my-0;
+  }
+
+  p:has(> img:only-child) {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   ul {

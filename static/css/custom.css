@@ -218,6 +218,12 @@ nav {
   border-radius: 6px;
 }
 
+/* 单张大图不继承主题 .content img 的上下 1rem 外边距。 */
+.content p:has(> img:not([width]):only-child) > img {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* 装着图片的段落：收掉上下边距，让文字和图片贴得更近 */
 .content p:has(> img) {
   margin-top: 0;
@@ -740,3 +746,25 @@ article > h1 {
     margin: 100px 0 80px;
   }
 }
+
+/* 文章末尾的无登录表情回应：按点击顺序穿插显示表情本体，加号展开表情库。 */
+.post-reactions { margin: 48px auto 20px; padding: 8px 14px; max-width: 420px; border: 2px dashed #e8b9cc; border-radius: 14px; text-align: center; }
+.post-reaction-area { display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start; gap: 7px; line-height: 0; max-width: 341px; /* 12 个表情的宽度（12*22 + 11*7），锁定每排最多 12 个 */ margin: 0 auto; }
+.post-reaction-controls { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 8px; }
+/* 表情超过 3 排时折叠：只显示最近 3 排，点箭头展开全部 */
+.post-reactions.folded .post-reaction-area { max-height: 80px; overflow: hidden; }
+.post-reaction-emoji { width: 22px; height: 22px; flex: 0 0 auto; }
+.post-reaction-emoji.is-new { animation: reaction-pop 260ms ease; }
+@keyframes reaction-pop { from { transform: scale(0); } to { transform: scale(1); } }
+.post-reaction-add { width: 34px; height: 34px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #d5dae2; border-radius: 9px; background: #ffffff; color: #7a8494; font-size: 1.25rem; line-height: 1; cursor: pointer; transition: transform 150ms ease, border-color 150ms ease, color 150ms ease; }
+.post-reaction-add:hover, .post-reaction-add:focus-visible { border-color: #d490a6; color: #d490a6; transform: translateY(-2px); }
+.post-reaction-more { display: none; width: 26px; height: 26px; flex: 0 0 auto; align-items: center; justify-content: center; border: 1.5px dashed #e8b9cc; border-radius: 50%; background: #ffffff; color: #b9a0ac; cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease; }
+.post-reaction-more svg { transition: transform 240ms cubic-bezier(0.34, 1.4, 0.64, 1); }
+.post-reactions.expanded .post-reaction-more svg { transform: rotate(-180deg); }
+.post-reaction-more:hover, .post-reaction-more:focus-visible { border-color: #d490a6; color: #d490a6; background: #fbe4ee; transform: translateY(-1px); }
+.post-reactions.can-fold .post-reaction-more { display: inline-flex; }
+.post-reaction-picker { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-top: 8px; padding: 6px 10px; background: #ffffff; border: 1px solid #d5dae2; border-radius: 999px; }
+.post-reaction-picker[hidden] { display: none !important; }
+.post-reaction-picker button { border: none; background: none; padding: 4px; line-height: 1; cursor: pointer; transition: transform 130ms ease; }
+.post-reaction-picker button:hover, .post-reaction-picker button:focus-visible { transform: scale(1.3); }
+.post-reaction-picker button img { width: 24px; height: 24px; display: block; }
