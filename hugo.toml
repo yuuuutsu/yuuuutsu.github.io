@@ -44,7 +44,7 @@ enableRobotsTXT = true
     endLevel = 4
     ordered = false
 
-# 顶部导航菜单
+# 顶部导航菜单（more 面板里的板块在 layouts/partials/nav-header.html 里维护）
 [menu]
   [[menu.nav]]
     name = "About"
@@ -54,10 +54,12 @@ enableRobotsTXT = true
     name = "Archive"
     url = "/posts"
     weight = 2
-  [[menu.nav]]
-    name = "Gallery"
-    url = "/gallery"
-    weight = 3
+
+[params.navMore]
+  # favorite 板块的角色子分类：以后加角色就添一行 {name = "角色名", url = "/favorite/角色名/"}
+  favorite = [
+    {name = "deceased", url = "/favorite/deceased/"},
+  ]
 
 # 关闭 Hugo 对 Node 工具的沙箱限制（toigian 主题构建 CSS 需要）
 [security.node.permissions]

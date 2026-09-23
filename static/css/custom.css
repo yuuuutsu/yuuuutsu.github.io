@@ -6,6 +6,7 @@ nav a {
 
 /* ===== 顶栏导航（简洁版）：左站名品牌 + 右编号菜单 ===== */
 .site-nav {
+  position: relative; /* 面板以它为锚点，从顶栏右侧往下弹 */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,6 +75,136 @@ nav a {
 }
 .nav-links a.active {
   font-weight: 700;
+}
+/* 「more」按钮：和普通导航链接同样式，右侧带小箭头 */
+.nav-more {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 0 3px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14.5px;
+  letter-spacing: 0.08em;
+  color: #d490a6;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: lowercase;
+}
+.nav-more::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #e8b9cc 0 6px, transparent 6px 10px);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-more:hover::after,
+.nav-more[aria-expanded="true"]::after {
+  transform: scaleX(1);
+}
+.nav-more[aria-expanded="true"] {
+  font-weight: 700;
+}
+.nav-more-caret {
+  transition: transform 0.25s ease;
+}
+.nav-more[aria-expanded="true"] .nav-more-caret {
+  transform: rotate(-180deg);
+}
+/* 右侧竖向导航面板：白色底 + 粉色虚线框，从顶栏右侧往下弹 */
+.nav-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 168px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px dashed #e8b9cc;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(212, 144, 166, 0.16);
+  animation: nav-panel-in 0.22s ease;
+}
+.nav-panel[hidden] {
+  display: none !important;
+}
+@keyframes nav-panel-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.nav-panel-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: 9px;
+  font-size: 14.5px;
+  letter-spacing: 0.08em;
+  color: #d490a6;
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: background-color 0.15s ease;
+}
+.nav-panel-item:hover {
+  background: #fbe4ee;
+}
+.nav-panel-item.active {
+  font-weight: 700;
+  background: #fbe4ee;
+}
+.nav-panel-toggle {
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.nav-panel-caret {
+  display: inline-block;
+  font-size: 10px;
+  color: #b9a0ac;
+  transition: transform 0.25s ease;
+}
+.nav-panel-toggle.is-open .nav-panel-caret {
+  transform: rotate(-180deg);
+}
+/* favorite 的角色子分类：粉色虚线竖线缩进 */
+.nav-panel-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 2px 12px;
+  padding-left: 10px;
+  border-left: 2px dashed #f0d3e0;
+}
+.nav-panel-sub[hidden] {
+  display: none;
+}
+.nav-panel-item.is-sub {
+  padding: 5px 8px;
+  font-size: 13.5px;
+  color: #b9a0ac;
+}
+.nav-panel-item.is-sub:hover {
+  color: #d490a6;
+}
+.nav-panel-hint {
+  display: block;
+  padding: 5px 8px;
+  font-size: 12.5px;
+  color: #b9a0ac;
 }
 /* 手机端：间距收紧 */
 @media (max-width: 640px) {

@@ -1064,9 +1064,13 @@ figure figcaption {
   padding-bottom: 0.5rem;
 }
 .content img {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
+.content p:has(> img:only-child) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 .content ul {
   margin-left: 1.5rem;
   list-style-type: disc;

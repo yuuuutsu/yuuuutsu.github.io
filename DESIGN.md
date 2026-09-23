@@ -80,11 +80,14 @@
 - 带 `width` 属性的小表情包：inline 跟文字同行。
 - **绝不修改用户的图片文件本身**（不裁剪、不压缩、不重命名；需要处理只能新建副本并先征得同意）。
 
-### 5.7 顶栏导航（2026-09-21 重设计，覆盖模板 `layouts/partials/nav-header.html`）
-- 结构：左侧站名品牌 `.nav-brand`（粉描边白色小圆点记号 + 站名，圆点呼应想法气泡；站名自动取 hugo.toml 的 title），右侧菜单 `.nav-links`（无编号，全小写，菜单名在 hugo.toml `[menu.nav]` 配置）。
+### 5.7 顶栏导航（2026-09-21 重设计，2026-09-23 加 more 面板；覆盖模板 `layouts/partials/nav-header.html`）
+- 结构：左侧站名品牌 `.nav-brand`（粉描边白色小圆点记号 + 站名，圆点呼应想法气泡；站名自动取 hugo.toml 的 title），右侧菜单 `.nav-links`（无编号，全小写，菜单名在 hugo.toml `[menu.nav]`，目前 about/archive）+「**more**」按钮。
+- **more 面板**：点 more 从顶栏右侧弹出一个**竖向**导航面板 `.nav-panel`（白底 + 2px 虚线粉 `#e8b9cc` 圆角框 + 淡粉投影，下滑淡入动画），当前板块在面板内高亮（加粗粉底）。面板内容在模板里维护：第一个是 **gallery**；第二个 **favorite** 可展开角色子分类（子列表粉色虚线竖线缩进，角色清单配在 hugo.toml `[params.navMore]` 的 `favorite = [{name="xx", url="/favorite/xx/"}]`，为空时显示占位提示；现有角色：**deceased** → `content/favorite/deceased/`，角色页命名用代号/意象词而非角色本名，用户偏好）；以后板块多了继续往下加。favorite 板块页面：`content/favorite/_index.md`。
+- 交互：点 more 开/关面板（小箭头旋转），点面板外或 Esc 关闭；favorite 点击展开/收起子分类。**注意：主题 baseof 会把 nav-header 渲染两份**（固定顶栏 + 正文开头），脚本必须按 `.site-nav` 实例各自接线（`dataset.navWired` 防重复）。
 - 不再显示面包屑和当前文章标题；当前栏目自动加粗 + 粉色虚线下划线（悬停时虚线从左滑出）。
 - 手机端：间距收紧。选择器用 `.site-nav`，勿用 `.nav`（会撞主题顶部导航样式）。
 
+- **页脚归属**：`layouts/partials/footer.html` 只分两种——**首页**固定在底部；**其余所有页面**（文章、相册、favorite、标签、归档……）都用完整流动页脚跟在正文后面，不用按板块维护白名单。`footer-mini` 样式已废弃。
 - 滚动条：主题默认隐藏（`::-webkit-scrollbar { width: 0 }`），custom.css 已恢复为 8px 粉色细条（`#e8b9cc`），勿删。
 
 ### 5.9 注释气泡 shortcode `tip`（移动端可用的 title 替代）

@@ -1,5 +1,6 @@
-{{/* 简洁版顶栏：左侧站名品牌（带气泡圆点记号），右侧编号菜单。
-     不再显示面包屑和当前文章标题——导航永远只有「站名 + 四个栏目」。 */}}
+{{/* 简洁版顶栏：左侧站名品牌，右侧 about/archive + 「more」按钮。
+     点 more 从顶栏右侧弹出一个竖向导航面板：gallery / favorite（可展开角色子分类），
+     以后板块多了也往面板里竖着加。 */}}
 <div class="site-nav">
   <a class="nav-brand" href="{{ $.Site.Home.RelPermalink }}">{{ $.Site.Title }}</a>
   <nav aria-label="主导航">
@@ -14,6 +15,72 @@
           <a href="{{ $url }}"{{ if $active }} class="active"{{ end }}>{{ .Name }}</a>
         </li>
       {{ end }}
+      <li>
+        <button class="nav-more" type="button" aria-haspopup="true" aria-expanded="false">
+          more
+          <svg class="nav-more-caret" viewBox="0 0 12 8" width="9" height="7" aria-hidden="true"><path d="M1.5 1.5 L6 6 L10.5 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </li>
     </ul>
   </nav>
+
+  {{/* 右侧竖向导航面板：想加新板块，照 favorite 的格式再添一组就行 */}}
+  {{ $galActive := hasPrefix $cur "/gallery" }}
+  {{ $favActive := hasPrefix $cur "/favorite" }}
+  <div class="nav-panel" hidden>
+    <a class="nav-panel-item{{ if $galActive }} active{{ end }}" href="{{ "gallery" | relURL }}">gallery</a>
+    <div class="nav-panel-group">
+      <button class="nav-panel-item nav-panel-toggle{{ if $favActive }} active{{ end }}" type="button" aria-expanded="false">
+        favorite
+        <span class="nav-panel-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-panel-sub" hidden>
+        {{ $chars := .Site.Params.navMore.favorite }}
+        {{ if $chars }}
+          {{ range $chars }}
+            <a class="nav-panel-item is-sub" href="{{ .url | relURL }}">{{ .name }}</a>
+          {{ end }}
+        {{ else }}
+          <span class="nav-panel-hint">喜欢的角色以后加在这里</span>
+        {{ end }}
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+  /* 主题会把 nav-header 渲染两份（顶栏 + 正文开头），这里给每个实例独立接线，只接一次 */
+  (function () {
+    document.querySelectorAll(".site-nav").forEach(function (nav) {
+      if (nav.dataset.navWired) return;
+      nav.dataset.navWired = "1";
+      var more = nav.querySelector(".nav-more");
+      var panel = nav.querySelector(".nav-panel");
+      var toggle = nav.querySelector(".nav-panel-toggle");
+      var sub = nav.querySelector(".nav-panel-sub");
+      function closePanel() {
+        panel.hidden = true;
+        more.setAttribute("aria-expanded", "false");
+      }
+      more.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var willOpen = panel.hidden;
+        panel.hidden = !willOpen;
+        more.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
+      if (toggle && sub) {
+        toggle.addEventListener("click", function () {
+          var willOpen = sub.hidden;
+          sub.hidden = !willOpen;
+          toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+          toggle.classList.toggle("is-open", willOpen);
+        });
+      }
+      document.addEventListener("click", function (e) {
+        if (!nav.contains(e.target)) closePanel();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closePanel();
+      });
+    });
+  })();
+</script>
