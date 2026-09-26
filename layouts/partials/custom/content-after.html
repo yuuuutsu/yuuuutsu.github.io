@@ -98,11 +98,18 @@
     var btnNext   = document.getElementById('lightbox-next');
     var btnClose  = document.getElementById('lightbox-close');
 
-    /* 排除图片：① 带 width 属性的内联小图；② stickers 文件夹里的图片 */
+    /* 排除图片：① 带 width 属性的内联小图；② stickers 文件夹里的图片；③ deceased 页画像与上香仪式（不可点击） */
     var imgs = Array.prototype.slice.call(document.querySelectorAll('.content img:not([width])'));
     imgs = imgs.filter(function (img) {
-      return img.getAttribute('src').indexOf('/stickers/') === -1;
+      if (img.getAttribute('src').indexOf('/stickers/') !== -1) return false;
+      if (img.closest && (img.closest('.deceased-portrait') || img.closest('.deceased-tablet') || img.closest('.deceased-book') || img.closest('.ritual'))) return false;
+      return true;
     });
+
+    /* deceased 页：给 body 打标记，让 custom.css 里 body.page-deceased 的规则生效（取消正文栏宽度限制） */
+    if (document.querySelector('.deceased-portrait')) {
+      document.body.classList.add('page-deceased');
+    }
     var idx = 0;
     var startX = null;
 

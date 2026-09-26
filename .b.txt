@@ -1,0 +1,1 @@
+"{\"bookW\":118,\"sim390\":{\"rowLeft\":135,\"bookLeft\":267,\"bookRight\":385,\"fits\":true,\"gap\":12}}"

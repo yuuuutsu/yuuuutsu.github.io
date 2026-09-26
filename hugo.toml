@@ -58,7 +58,7 @@ enableRobotsTXT = true
 [params.navMore]
   # favorite 板块的角色子分类：以后加角色就添一行 {name = "角色名", url = "/favorite/角色名/"}
   favorite = [
-    {name = "deceased", url = "/favorite/deceased/"},
+    {name = "mizuhito", url = "/favorite/mizuhito/"},
   ]
 
 # 关闭 Hugo 对 Node 工具的沙箱限制（toigian 主题构建 CSS 需要）

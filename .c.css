@@ -913,7 +913,7 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
 .deceased-tablet-row { position: relative; width: min(140px, 45vw); margin: -120px auto 0; z-index: 1; }
 .deceased-tablet { margin: 0; position: relative; z-index: 1; text-align: center; }
 .deceased-tablet img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: default; filter: none; border-radius: 0; }
-/* 追憶集（Group 6）：牌位右边、底边对齐；改 width .deceased-book调大小，margin-left 调与牌位的间距 */
+/* 追憶集（Group 6）：牌位右边、底边对齐；改 width 调大小，margin-left 调与牌位的间距 */
 .deceased-book { position: absolute; left: 100%; bottom: 0; margin: 0 0 0 39px; width: 98%; text-align: center; }
 .deceased-book img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: pointer; filter: none; border-radius: 0; transition: transform 0.3s ease; }
 .deceased-book a { display: block; text-decoration: none; }
@@ -923,8 +923,6 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
 .deceased-book a:hover img { transform: translateY(-3px) rotate(-2deg); }
 /* 追憶集内页：底部返回按钮（虚线粉分隔 + 上一篇同款胶囊按钮） */
 .memory-back { border-top: 2px dashed #e8b9cc; margin-top: 36px; padding-top: 28px; text-align: center; }
-/* 主题 .content a 的 p-1(4px) 会压过胶囊的 10px 28px → 提高优先级恢复标准胶囊尺寸 */
-.content .memory-back .post-nav-btn { padding: 10px 28px; font-weight: 400; }
 /* 主题会给 .content 里所有链接包 { } 括号，返回按钮也解除 */
 .content .memory-back a::before, .content .memory-back a::after { content: none; }
 /* deceased 页 · 上香仪式：安静、慢半拍，只有这一个页面使用 */
@@ -997,8 +995,6 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
   .ritual-smoke i { width: 5px; height: 45px; left: -2px; top: -39px; }
   /* 手机专用：位牌行保持原大小和上拉（PC 端已放大到 140px/-120px） */
   .deceased-tablet-row { width: min(120px, 45vw); margin: -90px auto 0; }
-  /* 手机专用：追憶集往左收（沿用 PC 的 39px 会顶出屏幕右缘），调间距改 margin-left */
-  .deceased-book { margin-left:-2px; }
 }
 /* 减少动画偏好：停掉烟雾闪烁与缓动，保留完整功能 */
 @media (prefers-reduced-motion: reduce) {

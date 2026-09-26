@@ -900,105 +900,64 @@ article > h1 {
 .post-reaction-picker button:hover, .post-reaction-picker button:focus-visible { transform: scale(1.3); }
 .post-reaction-picker button img { width: 24px; height: 24px; display: block; }
 
-/* deceased 页：取消正文栏宽度限制（只影响含画像的这一页，其他页面不变；用 JS 打 body 标记，兼容所有浏览器） */
-body.page-deceased .min-h-content { max-width: none; }
 /* deceased 人物志页的画像：居中、位于页面中间偏上；图自带相框装饰，不再额外加边框 */
-.deceased-portrait { width: min(650px, 100%); margin: -30px auto 16px; text-align: center; }
-
-/* deceased 页：压缩「导航→正文」的大间隙（主题默认 80px，其他页面不变；想更紧改小这个数） */
-body.page-deceased .min-h-content > article { margin-top: 58px !important; }
-/* 提高优先级：豁免 .content img 的全局缩小/右缩进规则，画像撑满外框并居中 */
-.content .deceased-portrait img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: default; filter: none; border-radius: 0; }
-/* 位牌+追憶集一行：行容器居中并负责上拉叠画像（原 -90px 在这），书挂在牌位右侧 */
-.deceased-tablet-row { position: relative; width: min(140px, 45vw); margin: -120px auto 0; z-index: 1; }
-.deceased-tablet { margin: 0; position: relative; z-index: 1; text-align: center; }
-.deceased-tablet img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: default; filter: none; border-radius: 0; }
-/* 追憶集（Group 6）：牌位右边、底边对齐；改 width .deceased-book调大小，margin-left 调与牌位的间距 */
-.deceased-book { position: absolute; left: 100%; bottom: 0; margin: 0 0 0 39px; width: 98%; text-align: center; }
-.deceased-book img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: pointer; filter: none; border-radius: 0; transition: transform 0.3s ease; }
-.deceased-book a { display: block; text-decoration: none; }
-/* 主题会给 .content 里所有链接加 { } 装饰括号，书是链接会被包住（} 排在图下面）→ 解除 */
-.content .deceased-book a::before, .content .deceased-book a::after { content: none; }
-.content .deceased-book a:hover { text-decoration: none; }
-.deceased-book a:hover img { transform: translateY(-3px) rotate(-2deg); }
-/* 追憶集内页：底部返回按钮（虚线粉分隔 + 上一篇同款胶囊按钮） */
-.memory-back { border-top: 2px dashed #e8b9cc; margin-top: 36px; padding-top: 28px; text-align: center; }
-/* 主题 .content a 的 p-1(4px) 会压过胶囊的 10px 28px → 提高优先级恢复标准胶囊尺寸 */
-.content .memory-back .post-nav-btn { padding: 10px 28px; font-weight: 400; }
-/* 主题会给 .content 里所有链接包 { } 括号，返回按钮也解除 */
-.content .memory-back a::before, .content .memory-back a::after { content: none; }
+.deceased-portrait { margin: 88px auto 16px; text-align: center; }
+.deceased-portrait img { display: block; width: 100%; height: auto; margin: 0 auto; cursor: default; filter: none; border-radius: 0; }
 /* deceased 页 · 上香仪式：安静、慢半拍，只有这一个页面使用 */
 .ritual { position: relative; margin: 72px auto 8px; max-width: 420px; text-align: center; user-select: none; -webkit-user-select: none; }
-/* 电脑：香炉居中，线香+香盒一列挂在香炉左边、底部对齐（同一水平线） */
-.ritual-stage { position: relative; }
-.ritual-offer { position: absolute; bottom: 0; left: 50%; margin-left: -240px; height: 148px; width: 150px; }
-.ritual-incense { width: 100px; margin: 0 auto;  left: 60px; top: 40px; cursor: grab; touch-action: none; -webkit-user-drag: none; position: relative; z-index: 3; }
-/* 线香初始藏在香盒里：点了香盒才出现一根；没插进炉子会收回盒里（可反复取） */
-.ritual .ritual-incense { opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
-.ritual.ritual-spawned .ritual-incense { opacity: 1; pointer-events: auto; }
+.ritual-offer { position: relative; height: 148px; }
+.ritual-incense { width: 56px; margin: 0 auto; cursor: grab; touch-action: none; -webkit-user-drag: none; position: relative; z-index: 3; }
 /* 香盒：叠在线香初始位置下方，点它可以取出线香；改 width 调大小，bottom 调上下 */
 .ritual-box { position: absolute; left: 50%; bottom: 0; width: 84px; transform: translateX(-50%); z-index: 2; cursor: pointer; touch-action: none; -webkit-user-drag: none; }
-/* 悬停小动作（和追憶集同款）：取香前才有，拖动/点燃后不触发；必须叠上 translateX(-50%) 否则跳位 */
-.ritual:not(.ritual-spawned) .ritual-box { transition: transform 0.35s ease; }
-.ritual:not(.ritual-spawned) .ritual-box:hover { transform: translateX(-50%) translateY(-3px) rotate(-2deg); }
 .ritual-incense.is-held { cursor: grabbing; transform: translateY(-4px) scale(1.02); transition: transform 0.3s ease; }
 .ritual-incense.is-near { transform: translateY(-6px) scale(1.045); }
 .ritual-incense.is-planting { transition: left 0.55s ease, top 0.55s ease; transform: none; }
 .ritual-incense.is-returning { transition: left 0.45s ease, top 0.45s ease; transform: none; }
 .ritual-held .ritual-hint, .ritual-done .ritual-hint { opacity: 0; transition: opacity 0.8s ease; }
-.ritual-hint { margin: 10px 0 0; font-size: 1rem; color: #b9a0ac; opacity: 0.75; letter-spacing: 0.05em; transform: translateX(12px); }
-.ritual-altar { position: relative; z-index: 2; width: 140px; margin: 0 auto; left: -5px; }
+.ritual-hint { margin: 10px 0 0; font-size: 0.85rem; color: #b9a0ac; opacity: 0.75; letter-spacing: 0.05em; }
+.ritual-altar { position: relative; width: 140px; margin: 56px auto 0; }
 .ritual-koro { display: block; width: 100%; position: relative; z-index: 1; }
 /* 插香判定区：比炉口大一圈，手机上好松手 */
 .ritual-plant-spot { position: absolute; left: 50%; top: -64px; width: 230px; height: 210px; transform: translateX(-50%); }
 /* 火星：很小、暖色、轻微闪烁 */
-.ritual-ember { position: absolute; z-index: 9; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #ff9d5c; opacity: 0; pointer-events: none; filter: blur(0.5px); }
-.ritual-lit .ritual-ember { opacity: 1; transition: opacity 1.2s ease; animation: ritual-ember-flicker 3s ease-in-out infinite; }
+.ritual-ember { position: absolute; z-index: 4; width: 5px; height: 5px; margin: -3px 0 0 -3px; border-radius: 50%; background: #d97b4a; opacity: 0; pointer-events: none; }
+.ritual-lit .ritual-ember { opacity: 1; transition: opacity 1.6s ease; animation: ritual-ember-flicker 3s ease-in-out infinite; }
 @keyframes ritual-ember-flicker {
-  0%, 100% { opacity: 0.8; box-shadow: 0 0 6px 1px rgba(255, 157, 92, 0.4); }
-  50% { opacity: 0.95; box-shadow: 0 0 8px 2px rgba(255, 157, 92, 0.55); }
+  0%, 100% { opacity: 0.55; box-shadow: 0 0 5px 1px rgba(217, 123, 74, 0.35); }
+  50% { opacity: 0.9; box-shadow: 0 0 7px 2px rgba(217, 123, 74, 0.55); }
 }
 /* 烟雾：三层错拍，很淡、缓慢上升、左右轻摆、渐隐 */
-.ritual-smoke { position: absolute; z-index: 9; width: 0; height: 0; pointer-events: none; }
-.ritual-smoke i { position: absolute; left: -3px; top: -52px; width: 6px; height: 60px; border-radius: 50%; background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.55) 45%, rgba(255, 255, 255, 0) 100%); filter: blur(3px); opacity: 0; transform-origin: bottom center; }
-.ritual-lit .ritual-smoke i { animation: ritual-smoke-rise 6.5s ease-in-out infinite; }
-.ritual-lit .ritual-smoke i:nth-child(2) { animation-duration: 8s; animation-delay: 2.2s; }
-.ritual-lit .ritual-smoke i:nth-child(3) { animation-duration: 5.4s; animation-delay: 4.1s; animation-name: ritual-smoke-rise-left; }
+.ritual-smoke { position: absolute; z-index: 4; width: 0; height: 0; pointer-events: none; }
+.ritual-smoke i { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, rgba(138, 143, 153, 0.55) 0%, rgba(138, 143, 153, 0) 70%); filter: blur(3px); opacity: 0; }
+.ritual-lit .ritual-smoke i { animation: ritual-smoke-rise 5.4s linear infinite; }
+.ritual-lit .ritual-smoke i:nth-child(2) { animation-duration: 6.8s; animation-delay: 1.8s; }
+.ritual-lit .ritual-smoke i:nth-child(3) { animation-duration: 4.6s; animation-delay: 3.4s; animation-name: ritual-smoke-rise-left; }
 @keyframes ritual-smoke-rise {
-  0% { transform: translate(0, 8px) scale(0.6, 0.5) rotate(2deg); opacity: 0; }
-  10% { opacity: 0.85; }
-  25% { transform: translate(4px, -26px) scale(0.85, 1) rotate(-2deg); }
-  45% { transform: translate(-3px, -58px) scale(0.75, 1.1) rotate(2.5deg); opacity: 0.55; }
-  68% { transform: translate(4px, -90px) scale(0.65, 1.2) rotate(-2deg); opacity: 0.3; }
-  100% { transform: translate(-2px, -125px) scale(0.55, 1.3) rotate(1.5deg); opacity: 0; }
+  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  14% { opacity: 0.9; }
+  60% { opacity: 0.5; }
+  100% { transform: translate(11px, -72px) scale(2.1); opacity: 0; }
 }
 @keyframes ritual-smoke-rise-left {
-  0% { transform: translate(0, 8px) scale(0.6, 0.5) rotate(-2deg); opacity: 0; }
-  10% { opacity: 0.8; }
-  25% { transform: translate(-4px, -24px) scale(0.85, 1) rotate(2deg); }
-  45% { transform: translate(3px, -55px) scale(0.75, 1.1) rotate(-2.5deg); opacity: 0.5; }
-  68% { transform: translate(-4px, -88px) scale(0.65, 1.2) rotate(2deg); opacity: 0.25; }
-  100% { transform: translate(2px, -122px) scale(0.55, 1.3) rotate(-1.5deg); opacity: 0; }
+  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  14% { opacity: 0.85; }
+  60% { opacity: 0.48; }
+  100% { transform: translate(-13px, -64px) scale(1.9); opacity: 0; }
 }
-/* 结束语：等点燃后 1s 才慢慢淡入；绝对定位叠在提示语原位置上，两句话出现在同一处 */
-.ritual-message { position: absolute; left: 0; right: 0; bottom: 2px; margin: 0; font-size: 1rem; line-height: 1.5; color: #b9a0ac; opacity: 0; pointer-events: none; transform: translateX(12px); }
+/* 结束语：等点燃后 1.4s 才慢慢淡入 */
+.ritual-message { margin: 40px 0 0; font-size: 0.9rem; color: #b9a0ac; opacity: 0; }
 .ritual-done .ritual-message { opacity: 0.7; transition: opacity 2.4s ease 1.4s; }
-/* 手机端：照搬电脑版布局（线香束在香炉左侧、底部同一水平线），整体约 0.75 倍缩放；想调大小按比例同改这几行 */
+/* 手机端：电脑上沿用上面的固定尺寸，手机屏窄，单独给一套等比放大的尺寸，避免比例失衡、位置错位 */
 @media (max-width: 640px) {
-  .ritual { margin: 40px auto 8px; }
-  .ritual-offer { margin-left: calc(max(-48vw, -180px) + 24px); height: 115px; width: 115px; }
-  .ritual-incense { width: 75px; left: 1px; top: 1px; }
-  .ritual-box { width: 63px; margin-left: 27px; }
-  .ritual-koro { width: 52px; max-width: none; margin: 0 auto; }
-  .ritual-altar { width: 105px; margin: 0 auto; left: 29px; }
-  .ritual-plant-spot { width: 175px; height: 160px; top: -48px; }
+  .ritual { margin: 48px auto 8px; }
+  .ritual-offer { height: 140px; }
+  .ritual-incense { width: 50px; }
+  .ritual-box { width: 60px; }
+  .ritual-altar { width: min(23vw, 170px); }
+  .ritual-plant-spot { width: 60vw; max-width: 230px; height: 190px; top: -52px; }
   /* 手机专用：火光和烟的大小（电脑版在上面 .ritual-ember / .ritual-smoke i 改） */
-  .ritual-ember { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
-  .ritual-smoke i { width: 5px; height: 45px; left: -2px; top: -39px; }
-  /* 手机专用：位牌行保持原大小和上拉（PC 端已放大到 140px/-120px） */
-  .deceased-tablet-row { width: min(120px, 45vw); margin: -90px auto 0; }
-  /* 手机专用：追憶集往左收（沿用 PC 的 39px 会顶出屏幕右缘），调间距改 margin-left */
-  .deceased-book { margin-left:-2px; }
+  .ritual-ember { width: 5px; height: 5px; margin: -3px 0 0 -3px; }
+  .ritual-smoke i { width: 18px; height: 18px; left: -9px; top: -9px; }
 }
 /* 减少动画偏好：停掉烟雾闪烁与缓动，保留完整功能 */
 @media (prefers-reduced-motion: reduce) {

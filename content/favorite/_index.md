@@ -1,3 +1,3 @@
 ---
-title: "favorite"
+title: "funeral home"
 ---

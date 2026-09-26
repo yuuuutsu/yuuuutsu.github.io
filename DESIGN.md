@@ -88,6 +88,8 @@
 - 手机端：间距收紧。选择器用 `.site-nav`，勿用 `.nav`（会撞主题顶部导航样式）。
 
 - **页脚归属**：`layouts/partials/footer.html` 只分两种——**首页**固定在底部；**其余所有页面**（文章、相册、favorite、标签、归档……）都用完整流动页脚跟在正文后面，不用按板块维护白名单。`footer-mini` 样式已废弃。
+- **角色页画像**（2026-09-27）：favorite 角色页可在 `_index.md` 里用 `<figure class="deceased-portrait"><img src="/images/favorite/xxx.png" /></figure>` 放画像——居中、页面中间偏上（`margin: 88px auto 16px`），图片 `width: 100%` 撑满正文栏（`--content-width` 52rem），图自带装饰不加边框、无投影（覆盖主题 `figure img` 的 drop-shadow）。角色页图片放 `static/images/favorite/`。
+- **上香仪式**（2026-09-27，仅 deceased 页）：画像下方的安静互动——取香 → 拖到香炉 → 松手吸附 → 自动点燃（CSS 火星微闪）→ 三层错拍淡烟循环 → 1.4s 后淡入「请在这里停留片刻。」；点燃后不可再拖、刷新重开、无数据库。结构在 `content/favorite/deceased/_index.md`（`.ritual` 容器），逻辑 `static/js/deceased-ritual.js`（Pointer Events：pointerdown/move/up + setPointerCapture，触屏 touch-action:none 防滚动），样式 custom.css `.ritual-*`（含 prefers-reduced-motion 降级：动画全停、保留功能、留一缕静态烟）。素材为用户 PNG 原样引用：香炉 `deceased-koro.png`（240×194）、线香束 `deceased-senkou.png`（196×300，香头在左上 14%/2.3%，入炉端右下 94.4%/96.3%，炉口中心 47.9%/16%——均为 Pillow 实测比例，JS 用它们定位火星/吸附点）。灯箱已排除 `.ritual img`。
 - 滚动条：主题默认隐藏（`::-webkit-scrollbar { width: 0 }`），custom.css 已恢复为 8px 粉色细条（`#e8b9cc`），勿删。
 
 ### 5.9 注释气泡 shortcode `tip`（移动端可用的 title 替代）
