@@ -1,1 +1,1 @@
-"{\"tabletW\":140,\"tabletTop\":355,\"bookW\":98,\"gap\":10,\"bottomDiff\":0}"
+"{\"v\":\"38\",\"spawnOff\":[0,1],\"planted\":true,\"stickLineX_vs_koroCenter\":-2,\"endY_vs_ashCenter\":-3,\"emberAtTip\":[0,0],\"hScroll\":false}"

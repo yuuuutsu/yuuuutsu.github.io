@@ -1,0 +1,2 @@
+koro file 240x194 visible x 5..234 y 4..192
+ash x 0.153..0.847 (center 0.500)  y 0.085..0.245 (center 0.165)  [ratio of visible bbox]

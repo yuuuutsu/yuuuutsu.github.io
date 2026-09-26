@@ -31,4 +31,4 @@ title: "mizuhito"
   <p class="ritual-hint">取一炷香，插入香炉</p>
   <p class="ritual-message">请在这里停留片刻。</p>
 </div>
-<script src="/js/deceased-ritual.js?v=34"></script>
+<script src="/js/deceased-ritual.js?v=38"></script>
