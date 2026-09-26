@@ -15,8 +15,8 @@
   /* PNG 实测比例（2026-09-27 用 Pillow 量 deceased-senkou.png：可见香身是正中一条竖线 x≈0.496） */
   var TIP_X = 0.496, TIP_Y = 0.059;     /* 香头：香身最顶端 */
   var END_X = 0.496, END_Y = 0.941;     /* 入炉的一端：香身最底端 */
-  var MOUTH_X = 0.48, MOUTH_Y = 0.18;   /* 插香位置·电脑：香灰中心（占香炉图的比例） */
-  var MOUTH_X_M = 0.5, MOUTH_Y_M = 0.18; /* 插香位置·手机：同是香灰中心 */
+  var MOUTH_X = 0.48, MOUTH_Y = 0.23;   /* 插香位置·电脑：香灰中心（占香炉图的比例） */
+  var MOUTH_X_M = 0.5, MOUTH_Y_M = 0.28; /* 插香位置·手机：往下调深一点，有插进香灰的感觉（线香在香炉图层前面，不能太深） */
   var EMBER_DX = 0, EMBER_DY = 0;       /* 火光偏移（px）：香头已算准，无需补偿 */
   var EMBER_DX_M = 0, EMBER_DY_M = 0;   /* 火光偏移·手机 */
   var SMOKE_DX = 0, SMOKE_DY = 0;       /* 烟偏移（px）：跟着香头 */
