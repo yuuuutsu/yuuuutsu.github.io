@@ -913,7 +913,7 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
 .deceased-tablet-row { position: relative; width: min(140px, 45vw); margin: -120px auto 0; z-index: 1; }
 .deceased-tablet { margin: 0; position: relative; z-index: 1; text-align: center; }
 .deceased-tablet img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: default; filter: none; border-radius: 0; }
-/* 追憶集（Group 6）：牌位右边、底边对齐；改 width 调大小，margin-left 调与牌位的间距 */
+/* 追憶集（Group 6）：牌位右边、底边对齐；改 width .deceased-book调大小，margin-left 调与牌位的间距 */
 .deceased-book { position: absolute; left: 100%; bottom: 0; margin: 0 0 0 39px; width: 98%; text-align: center; }
 .deceased-book img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; cursor: pointer; filter: none; border-radius: 0; transition: transform 0.3s ease; }
 .deceased-book a { display: block; text-decoration: none; }
@@ -923,6 +923,8 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
 .deceased-book a:hover img { transform: translateY(-3px) rotate(-2deg); }
 /* 追憶集内页：底部返回按钮（虚线粉分隔 + 上一篇同款胶囊按钮） */
 .memory-back { border-top: 2px dashed #e8b9cc; margin-top: 36px; padding-top: 28px; text-align: center; }
+/* 主题 .content a 的 p-1(4px) 会压过胶囊的 10px 28px → 提高优先级恢复标准胶囊尺寸 */
+.content .memory-back .post-nav-btn { padding: 10px 28px; font-weight: 400; }
 /* 主题会给 .content 里所有链接包 { } 括号，返回按钮也解除 */
 .content .memory-back a::before, .content .memory-back a::after { content: none; }
 /* deceased 页 · 上香仪式：安静、慢半拍，只有这一个页面使用 */
@@ -984,17 +986,21 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
 /* 手机端：照搬电脑版布局（线香束在香炉左侧、底部同一水平线），整体约 0.75 倍缩放；想调大小按比例同改这几行 */
 @media (max-width: 640px) {
   .ritual { margin: 40px auto 8px; }
-  .ritual-offer { margin-left: calc(max(-48vw, -180px) + 24px); height: 115px; width: 115px; }
+  /* 手机端香炉组严格居中：香炉居中后，插好的线香/火光/烟由 JS 按炉图实时位置跟随，任何屏宽都自动居中；
+     线香束的偏移与炉的偏移是配对的，炉归零束也归零 */
+  .ritual-offer { margin-left: max(-48vw, -180px); height: 115px; width: 115px; }
   .ritual-incense { width: 75px; left: 1px; top: 1px; }
   .ritual-box { width: 63px; margin-left: 27px; }
   .ritual-koro { width: 52px; max-width: none; margin: 0 auto; }
-  .ritual-altar { width: 105px; margin: 0 auto; left: 29px; }
+  .ritual-altar { width: 105px; margin: 0 auto; }
   .ritual-plant-spot { width: 175px; height: 160px; top: -48px; }
   /* 手机专用：火光和烟的大小（电脑版在上面 .ritual-ember / .ritual-smoke i 改） */
   .ritual-ember { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
   .ritual-smoke i { width: 5px; height: 45px; left: -2px; top: -39px; }
   /* 手机专用：位牌行保持原大小和上拉（PC 端已放大到 140px/-120px） */
   .deceased-tablet-row { width: min(120px, 45vw); margin: -90px auto 0; }
+  /* 手机专用：追憶集往左收（沿用 PC 的 39px 会顶出屏幕右缘），调间距改 margin-left */
+  .deceased-book { margin-left:-2px; }
 }
 /* 减少动画偏好：停掉烟雾闪烁与缓动，保留完整功能 */
 @media (prefers-reduced-motion: reduce) {

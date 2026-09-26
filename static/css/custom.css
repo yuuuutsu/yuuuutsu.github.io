@@ -986,11 +986,13 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
 /* 手机端：照搬电脑版布局（线香束在香炉左侧、底部同一水平线），整体约 0.75 倍缩放；想调大小按比例同改这几行 */
 @media (max-width: 640px) {
   .ritual { margin: 40px auto 8px; }
-  .ritual-offer { margin-left: calc(max(-48vw, -180px) + 24px); height: 115px; width: 115px; }
+  /* 手机端香炉组严格居中：香炉居中后，插好的线香/火光/烟由 JS 按炉图实时位置跟随，任何屏宽都自动居中；
+     线香束的偏移与炉的偏移是配对的，炉归零束也归零 */
+  .ritual-offer { margin-left: max(-48vw, -180px); height: 115px; width: 115px; }
   .ritual-incense { width: 75px; left: 1px; top: 1px; }
   .ritual-box { width: 63px; margin-left: 27px; }
   .ritual-koro { width: 52px; max-width: none; margin: 0 auto; }
-  .ritual-altar { width: 105px; margin: 0 auto; left: 29px; }
+  .ritual-altar { width: 105px; margin: 0 auto; }
   .ritual-plant-spot { width: 175px; height: 160px; top: -48px; }
   /* 手机专用：火光和烟的大小（电脑版在上面 .ritual-ember / .ritual-smoke i 改） */
   .ritual-ember { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
