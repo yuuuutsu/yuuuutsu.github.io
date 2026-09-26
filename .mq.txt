@@ -1,0 +1,8 @@
+=== block @line 210 ===
+=== block @line 475 ===
+=== block @line 599 ===
+=== block @line 816 ===
+  .content img {
+  .content p:has(> img:not([width]):not(:only-child)) {
+  .content p:has(> img),
+  .content p:has(+ p > img) {

@@ -992,7 +992,10 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
   .ritual-incense { width: 75px; left: 1px; top: 1px; }
   .ritual-box { width: 63px; margin-left: 27px; }
   .ritual-koro { width: 52px; max-width: none; margin: 0 auto; }
-  .ritual-altar { width: 105px; margin: 0 auto; }
+  /* 816 行的手机文章图片规则（.content img margin-left:0）优先级更高，会把香炉改成左对齐
+     → 用更高优先级夺回居中；香炉容器的 left 也归零（抵消电脑版的 -5px），严格居中 */
+  .content .ritual-koro { margin-left: auto; margin-right: auto; }
+  .ritual-altar { width: 105px; margin: 0 auto; left: 0; }
   .ritual-plant-spot { width: 175px; height: 160px; top: -48px; }
   /* 手机专用：火光和烟的大小（电脑版在上面 .ritual-ember / .ritual-smoke i 改） */
   .ritual-ember { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
