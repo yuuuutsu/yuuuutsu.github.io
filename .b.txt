@@ -1,1 +1,0 @@
-"{\"at390\":{\"cw\":390,\"koroCenterOffset\":3,\"bundleGapToKoro\":-9,\"koroInRitual\":true},\"at320\":{\"cw\":320,\"koroCenterOffset\":3,\"bundleGapToKoro\":-9,\"koroInRitual\":true},\"at414\":{\"cw\":414,\"koroCenterOffset\":3,\"bundleGapToKoro\":-9,\"koroInRitual\":true}}"

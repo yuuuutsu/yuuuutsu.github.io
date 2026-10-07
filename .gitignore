@@ -3,7 +3,7 @@ node_modules/
 
 # 构建产物（部署时会自动生成）
 public/
-resources/_gen/
+resources/
 
 # Hugo 锁文件
 .hugo_build.lock
@@ -14,10 +14,20 @@ build-log.txt
 env-check.txt
 title-check.txt
 server-check.txt
+check.txt
 .local-checks/
+
+# 调试残留：散落在根目录、以点开头的截图 / 网页快照 / 记录 / 脚本
+/.*.png
+/.*.html
+/.*.txt
+/.*.py
+/.*.js
+/.*.css
 
 # 旧文件备份
 home.html.bak
+*.bak
 
 # 系统文件
 .DS_Store
