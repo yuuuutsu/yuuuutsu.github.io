@@ -272,6 +272,59 @@ html {
   visibility: visible;
 }
 
+/* ===== 点击复制：带下划线的文字，点一下复制到剪贴板 ===== */
+/* 用法：copy 短代码包住文字 → <span class="copy-text">正文文字</span> */
+.content .copy-text {
+  position: relative;
+  cursor: pointer;
+  text-decoration: underline;          /* 粉色虚线下划线，和顶栏当前栏目同款 */
+  text-decoration-style: dashed;
+  text-decoration-color: #e8b9cc;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.content .copy-text:hover,
+.content .copy-text:focus {
+  color: #b0577e;
+  text-decoration-color: #d490a6;
+  outline: none;
+}
+.content .copy-text:active {
+  opacity: 0.6;
+}
+.content .copy-text .copy-raw {
+  display: none;                       /* 只用来存原文给脚本读，不显示、不参与下划线 */
+}
+.content .copy-text::after {
+  content: "已复制";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  padding: 5px 12px;
+  background: #fff;                    /* 想法气泡同款：白底 + 粉色描边 */
+  border: 2px solid #e8b9cc;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-style: normal;
+  line-height: 1.4;
+  color: #b0577e;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 30;
+  pointer-events: none;
+}
+.content .copy-text.copied::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
 @font-face {
   font-family: "喵啃糖圆";
   src: url("/fonts/喵啃糖圆.ttf") format("truetype");
