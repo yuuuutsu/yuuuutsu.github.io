@@ -1,0 +1,15 @@
+{{- /* 点击复制：页面上显示带粉色虚线下的文字，点一下复制到剪贴板。
+     用法：用左右各两层花括号把 copy 与 /copy 包起来，中间放要复制的文字。
+     内容按纯文本处理，不要写 HTML 或 Markdown；内容里的换行会显示成换行，复制的也是原文。
+     内容为空时什么都不输出，这样文章里万一混进空的 copy 标记也不会把页面搞乱。
+     点击逻辑在 /js/copy-text.js（由 layouts/partials/custom/head.html 全站引入，defer 加载）。
+
+     实现提醒：换行不要用「replace 成 <br> 再整体输出」的写法 ——
+     Go 模板会把字符串里的 < 转义成 &lt;，页面上就会露出一个 &lt;br&gt;。
+     正确做法是逐行输出：行与行之间由模板自己写 <br>（模板里的 <br> 不会被转义），
+     每行文字单独输出，仍然受自动转义保护。 */ -}}
+{{- $t := strings.TrimSpace .Inner -}}
+{{- $t = replaceRE `\r\n` "\n" $t -}}
+{{- if $t -}}
+<span class="copy-text" role="button" tabindex="0" aria-label="点击复制">{{ range $i, $line := split $t "\n" }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end }}<span class="copy-raw" hidden>{{ $t }}</span></span>
+{{- end -}}
