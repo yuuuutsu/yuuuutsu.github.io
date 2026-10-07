@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/posts/03.md",
+                "file": "content/posts/04.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03"
+              "title": "04"
             }
           }
         ]
@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:游戏",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -191,30 +191,34 @@
   },
   "active": "7da3ff1ba138f1ab",
   "lastOpenFiles": [
-    "public/posts/03/index.html",
-    "public/posts/03",
-    "public/images/金光御九界日志/风花雪月.jpg",
-    "public/images/金光御九界日志/老铁生日.jpg",
-    "public/images/金光御九界日志/竞谴 (9).jpg",
-    "public/images/金光御九界日志/竞谴 (8).jpg",
-    "public/images/金光御九界日志/竞谴 (7).jpg",
-    "public/images/金光御九界日志/竞谴 (6).jpg",
-    "public/images/金光御九界日志/竞谴 (5).jpg",
-    "public/images/金光御九界日志/竞谴 (4).jpg",
-    "public/images/金光御九界日志/竞谴 (3).jpg",
-    "public/images/金光御九界日志/竞谴 (2).jpg",
+    "public/images/娃娃/SANY0064.JPG",
+    "static/images/娃娃/SANY0064.JPG",
+    "public/images/娃娃/SANY0055.JPG",
+    "static/images/娃娃/SANY0055.JPG",
+    "public/images/娃娃/SANY0040.JPG",
+    "static/images/娃娃/SANY0040.JPG",
+    "public/images/娃娃/SANY0032.JPG",
+    "static/images/娃娃/SANY0032.JPG",
+    "public/images/娃娃/SANY0019(2).jpg",
+    "static/images/娃娃/SANY0019(2).jpg",
+    "public/images/娃娃/SANY0011.JPG",
+    "static/images/娃娃/~0261005_233956..tmp",
+    "static/images/娃娃/20261005_233956..jpg.~tmp",
+    "public/images/娃娃",
+    "static/images/娃娃",
+    "public/images/04",
+    "static/images/04",
+    "public/posts/__tmp-copy-test/index.html",
+    "public/posts/__tmp-copy-test",
+    "content/posts/__tmp-copy-test.md",
+    "public/js/copy-text.js",
+    "static/js/copy-text.js",
+    "content/posts/__tmp-shortcode-test.md",
     "content/posts/02.md",
+    "content/posts/04.md",
     "content/posts/03.md",
     "content/posts/01.md",
-    "public/js/reactions.js",
-    "static/js/reactions.js",
-    "static/js",
-    "layouts/partials/reactions.html",
-    "static/images/金光御九界日志/未确认 622240.crdownload",
-    "static/images/金光御九界日志/未确认 844888.crdownload",
-    "static/images/金光御九界日志/未确认 850795.crdownload",
-    "static/images/金光御九界日志/未确认 300666.crdownload",
-    "static/images/金光御九界日志/未确认 494208.crdownload",
+    "content/posts/03 - 副本.md",
     "2026-09-21.md",
     "content/posts/02 - 副本.md"
   ]
