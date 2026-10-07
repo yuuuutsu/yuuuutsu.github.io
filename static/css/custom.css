@@ -1012,3 +1012,55 @@ body.page-deceased .min-h-content > article { margin-top: 58px !important; }
   .ritual-lit .ritual-smoke i:first-child { opacity: 0.35; }
   .ritual-message { transition: none !important; }
 }
+
+/* 文章里的折叠条：小标题前换成和顶栏站名同款的「粉描边小白圆点」 */
+.content details > summary {
+  list-style: none;              /* 去掉浏览器默认的实心小三角 */
+  display: flex;
+  align-items: center;
+  gap: 7px;                      /* 圆点和文字的间距，和站名一致 */
+  cursor: pointer;
+}
+/* Safari 老版本的默认三角要单独关掉 */
+.content details > summary::-webkit-details-marker { display: none; }
+/* 主题自带的 normalize 会给 summary 画一个小三角（::marker），这里也一并关掉 */
+.content details > summary::marker { content: none; }
+/* 圆点本体：配方照抄 .nav-brand::before（11px 白底 + 2px 粉描边） */
+.content details > summary::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 2px solid #e8b9cc;
+  border-radius: 50%;
+}
+/* 展开状态：圆心出现一颗很小的粉点，颜色和描边一致，一眼能看出这段是开着的 */
+.content details[open] > summary::before {
+  background-color: #fff;
+  background-image: radial-gradient(circle at 50% 50%, #e8b9cc 0 2px, transparent 2.1px);
+}
+
+/* 正文里的分割线（Markdown 里打 ------ 生成）：
+   比页首的 2px 粉色虚线更细更淡，中间嵌一颗四角星，手账感。
+   注意：hr 是空元素，浏览器不给它渲染 ::after，所以星星用「背景图」画。 */
+.content hr {
+  border: none;
+  height: 12px;              /* 给星星留出高度，线本身靠背景层的 1.5px 高来画 */
+  margin: 1.6rem 0;
+  background-image:
+    /* 第一层：一条 1.5px 细线，正中间 30px 宽的口子留给星星 */
+    linear-gradient(to right,
+      #eed7e2 0 calc(50% - 15px),
+      transparent calc(50% - 15px),
+      transparent calc(50% + 15px),
+      #eed7e2 calc(50% + 15px)),
+    /* 第二层：内嵌 SVG 四角星，不依赖字体。
+       四条边用三次贝塞尔曲线（C）画成弧；尖角用同色描边 + stroke-linejoin:round 磨圆，
+       transform 里的 scale(0.8) 是给描边留出空间，免得磨圆后的尖被画布边缘裁掉。
+       调弯度：改 12.8 / 8.4 / 15.6 / 11.2；调圆润程度：改 stroke-width */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath transform='translate(12 12) scale(0.8) translate(-12 -12)' d='M12 0 C12.8 8.4 15.6 11.2 24 12 C15.6 12.8 12.8 15.6 12 24 C11.2 15.6 8.4 12.8 0 12 C8.4 11.2 11.2 8.4 12 0 Z' fill='%23eed7e2' stroke='%23eed7e2' stroke-width='4.4' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center, center center;
+  background-size: 100% 1.5px, 12px 12px;
+}
