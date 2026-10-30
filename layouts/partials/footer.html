@@ -7,8 +7,8 @@
     <div class="home-footer-inner lowercase italic gap-3">
       <span class="text-muted">
         &copy;
-        {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}
-        · {{ $days }}Days
+        {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}<span class="site-year" data-start="{{ site.Params.blogStart | default "2026-09-19" }}">{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}</span>
+        · <span class="site-days" data-start="{{ site.Params.blogStart | default "2026-09-19" }}">{{ $days }}</span>Days
         <span class="font-bold">{{ T "footer_text" | default "hugo-toigian" }}</span>
       </span>
       <button id="header-theme-button" aria-label="Toggle Dark Mode" tabindex="0" class="home-footer-toggle focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg p-1">
@@ -30,8 +30,8 @@
   <div class="inflow-footer-inner">
     <span class="text-muted">
       &copy;
-      {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}
-      · {{ $days }}Days
+      {{ $startYear := $start.Format "2006" }}{{ $nowYear := now.Format "2006" }}<span class="site-year" data-start="{{ site.Params.blogStart | default "2026-09-19" }}">{{ $startYear }}{{ if ne $startYear $nowYear }} - {{ $nowYear }}{{ end }}</span>
+      · <span class="site-days" data-start="{{ site.Params.blogStart | default "2026-09-19" }}">{{ $days }}</span>Days
       <span class="font-bold">{{ T "footer_text" | default "hugo-toigian" }}</span>
     </span>
     <button id="header-theme-button" aria-label="Toggle Dark Mode" tabindex="0" class="inflow-footer-toggle focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg p-1">
@@ -45,3 +45,32 @@
   </div>
 </footer>
 {{ end }}
+
+{{/* 页脚计时：Hugo 的 now 只在构建那一刻有效（静态站点），天数会永远停在最后一次 push 的日子。
+    所以改由访客的浏览器现场计算：用 data-start 里的开站日期减去今天，保证实时更新。
+    span 里保留 Hugo 算的天数作为兜底（万一浏览器不支持 JS 也有数字可看） */}}
+<script>
+  (function () {
+    function fillFooterCounter() {
+      var MS_PER_DAY = 86400000;
+      var dayEls = document.querySelectorAll(".site-days");
+      if (!dayEls.length) return;
+      var start = new Date(dayEls[0].getAttribute("data-start") + "T00:00:00");
+      var now = new Date();
+      var days = Math.floor((now - start) / MS_PER_DAY) + 1;
+      if (days < 1) days = 1;
+      for (var i = 0; i < dayEls.length; i++) dayEls[i].textContent = days;
+      var yearEls = document.querySelectorAll(".site-year");
+      for (var j = 0; j < yearEls.length; j++) {
+        var sy = start.getFullYear();
+        var ny = now.getFullYear();
+        yearEls[j].textContent = sy === ny ? String(sy) : sy + " - " + ny;
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fillFooterCounter);
+    } else {
+      fillFooterCounter();
+    }
+  })();
+</script>
