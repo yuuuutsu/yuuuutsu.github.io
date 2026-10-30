@@ -361,6 +361,13 @@ footer {
   color: #d490a6;
 }
 
+/* 页脚文字专用：主题给 .text-muted 定了灰紫色（#9893a5），优先级比上面的
+   footer 标签选择器高，会把粉色压掉。这里用「footer .text-muted」同样以
+   class 对 class、但更靠后加载，把页脚文字的粉色夺回来 */
+footer .text-muted {
+  color: #d490a6;
+}
+
 /* 白色波点背景：两层圆点错开半格；fixed = 波点钉在屏幕上，滚动时内容滑过 */
 body,
 header,
